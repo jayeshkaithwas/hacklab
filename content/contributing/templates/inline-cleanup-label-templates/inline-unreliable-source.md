@@ -1,1 +1,0 @@
-<sup>\[_[[inline-unreliable-source|Unreliable source]]_\]</sup>

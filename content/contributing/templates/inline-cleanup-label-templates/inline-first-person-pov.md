@@ -1,1 +1,0 @@
-<sup>\[_[[inline-first-person-pov|First-person POV]]_\]</sup>

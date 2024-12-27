@@ -1,1 +1,0 @@
-<sup>\[_[[inline-pov-statement|POV statement]]_\]</sup>

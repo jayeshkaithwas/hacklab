@@ -1,1 +1,0 @@
-<sup>\[_[[inline-data-missing|Data missing]]_\]</sup>

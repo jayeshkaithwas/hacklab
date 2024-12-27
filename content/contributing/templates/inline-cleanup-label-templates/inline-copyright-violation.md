@@ -1,1 +1,0 @@
-<sup>\[_[[inline-copyright-violation|Copyright violation]]_\]</sup>

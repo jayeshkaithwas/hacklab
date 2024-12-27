@@ -1,1 +1,0 @@
-<sup>\[_[[inline-info-missing|Info missing]]_\]</sup>

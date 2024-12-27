@@ -1,1 +1,0 @@
-<sup>\[_[[inline-definition-needed|Definition needed]]_\]</sup>

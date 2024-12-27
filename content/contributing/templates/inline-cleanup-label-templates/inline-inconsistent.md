@@ -1,1 +1,0 @@
-<sup>\[_[[inline-inconsistent|Inconsistent]]_\]</sup>

@@ -1,1 +1,0 @@
-<sup>\[_[[inline-verify-spelling|Verify spelling]]_\]</sup>

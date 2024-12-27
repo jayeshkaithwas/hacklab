@@ -12,6 +12,7 @@ html {
 body,
 section {
   margin: 0;
+  max-width: 100%;
   box-sizing: border-box;
   background-color: var(--light);
   font-family: var(--bodyFont);
@@ -233,7 +234,7 @@ a {
 
     & .page-header {
       grid-area: grid-header;
-      margin: $topSpacing 0 0 0;
+      margin: 0 0 0 0;
       @media all and ($mobile) {
         margin-top: 0;
         padding: 0;

@@ -1,1 +1,0 @@
-<sup>\[_[[inline-disputed|Disputed]]_\]</sup>

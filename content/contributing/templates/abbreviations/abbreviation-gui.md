@@ -1,1 +1,0 @@
-<abbr title="graphical user interface">GUI</abbr>

@@ -20,6 +20,8 @@ import MobileOnly from "./MobileOnly"
 import RecentNotes from "./RecentNotes"
 import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
+import LinksHeader from "./LinksHeader"
+import TableOfContents2 from "./TableOfContents2"
 
 export {
   ArticleTitle,
@@ -32,6 +34,7 @@ export {
   ContentMeta,
   Spacer,
   TableOfContents,
+  TableOfContents2,
   Explorer,
   TagList,
   Graph,
@@ -43,5 +46,6 @@ export {
   RecentNotes,
   NotFound,
   Breadcrumbs,
+  LinksHeader,
   Comments,
 }

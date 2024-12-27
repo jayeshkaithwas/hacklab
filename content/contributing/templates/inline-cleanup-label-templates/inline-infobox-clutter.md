@@ -1,1 +1,0 @@
-<sup>\[_[[inline-infobox-clutter|Infobox clutter]]_\]</sup>
