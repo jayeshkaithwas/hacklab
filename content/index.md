@@ -17,6 +17,10 @@ Please feel free to [provide feedback](https://github.com/jayeshkaithwas/hacklab
 ---
 - [[Status Codes]]
 
+## Tools
+---
+- [[BeEF]] (The Browser Exploitation Framework Project)
+
 ## Exam Notes
 ---
 - [[CAP]] (Certified Appsec Practitioner)
