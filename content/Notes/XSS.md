@@ -114,7 +114,10 @@ In a typical case, the input field would be populated from part of the HTTP requ
 For more Information refer [[DOM-based]].
 
 For Hands-on Practice you can try to solve this **labs/ctfs**:
-- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink)  - WriteUp [[LAB 0.3|LAB 0.3]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink) - Write-up [[LAB 0.3|LAB 0.3]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element) - Write-up [[LAB 0.4|LAB 0.4]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-innerhtml-sink) - Write-up [[LAB 0.5]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-jquery-href-attribute-sink) - Write-up [[LAB 0.6|LAB 0.6]]
 ## Crowd Sourcing
 ---
 One of my favorite methods to find a huge number of valid XSS vulnerabilities is to visit http://www.reddit.com/r/xss. People will post on that sub-reddit the different XSS findings they have.

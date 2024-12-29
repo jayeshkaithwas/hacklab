@@ -21,7 +21,7 @@ To solve this lab, perform a cross-site scripting attack that calls the `alert` 
 
 # Solution
 ---
-#### Understanding the Vulnerability
+## Understanding the Vulnerability
 
 The lab description highlights that the `document.write` function is called with user-controlled data, making it susceptible to XSS attacks. The key here is that the function uses `location.search`, which retrieves the query string in the URL. By manipulating this query string, we can inject and execute our JavaScript code.
 
@@ -30,7 +30,9 @@ But before diving in, let’s briefly understand the Document Object Model (DOM)
 - The **DOM** is a hierarchical representation of an HTML or XML document, allowing scripts to dynamically interact with and modify web page elements.
 - In a browser’s developer tools, the **Inspector** tab (or **Elements** tab in Chrome) lets you view and navigate the DOM structure.
 
-#### Initial Exploration
+---
+
+## Initial Exploration
 
 Visit the blog page provided in the lab and locate the search bar. First, let’s test for reflected XSS by entering the following payload in the search bar:
 
@@ -40,7 +42,10 @@ Visit the blog page provided in the lab and locate the search bar. First, let’
 
 After submitting, observe the response. The page displays the entire input, including the script tags, without executing the script. Let’s dig deeper to understand why.
  ![[images/Pasted image 20241228112525.png]]
-#### Inspecting the DOM
+
+---
+
+## Inspecting the DOM
 
 1. Right-click on the search result and choose **Inspect** to open the DOM browser.
 2. Notice that the script is reflected twice in the DOM:
@@ -63,7 +68,7 @@ if (query) {
 </script>
 ```
 
-##### Breakdown of the Script:
+### Breakdown of the Script:
 
 - `trackSearch(query)`: A function that generates an `<img>` tag with a `src` attribute containing the `query` value.
 - `document.write`: Dynamically writes the generated `<img>` tag into the DOM.
@@ -72,7 +77,9 @@ if (query) {
 
 This script intends to track search queries by embedding them in an image URL. However, it directly includes user input without sanitization, leading to the vulnerability.
 
-#### Crafting the Payload
+---
+
+## Crafting the Payload
 
 Our initial payload didn’t work because it remained confined within the `src` attribute of the `<img>` tag. To execute a script, we need to "break out" of this context. Let’s test this idea:
 
@@ -92,7 +99,7 @@ Our initial payload didn’t work because it remained confined within the `src` 
     ```
     
 
-##### Breakdown of the Payload:
+### Breakdown of the Payload:
 
 - `">`: Closes the original `src` attribute and the `<img>` tag.
 - `<img>`: Starts a new `<img>` element.
@@ -100,7 +107,9 @@ Our initial payload didn’t work because it remained confined within the `src` 
 - `onerror`: Executes JavaScript when the `src` fails to load.
 - `alert('MardukWasHere')`: Triggers a pop-up with a custom message.
 
-#### Testing the Payload
+---
+
+## Testing the Payload
 
 1. Replace the search query in the URL with the crafted payload.
 2. Submit the search and observe the behavior. The browser should display a pop-up alert showing your custom message, confirming the script execution.

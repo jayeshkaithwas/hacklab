@@ -22,7 +22,9 @@ To solve this lab, submit a comment that calls the `alert` function when the blo
 ---
 In this lab, we’ll tackle stored XSS vulnerability, this time by injecting malicious JavaScript into the comment section of a blog. The goal is to craft a script that gets stored on the server and executed in a victim’s browser when they view the blog post. Let’s break it down step by step.
 
-#### Locating the Comment Section
+---
+
+## Locating the Comment Section
 
 Navigate to one of the blog posts. Scroll down to find the comment section, which usually has fields for:
 
@@ -43,7 +45,10 @@ You don’t need to provide real information. Feel free to make something up for
 ![[images/Pasted image 20241228095700.png]]
 
 You might notice the text appearing in a smaller font, like a text. If so, the site is likely rendering your input directly as HTML.
-#### Crafting the XSS Payload
+
+---
+
+## Crafting the XSS Payload
 
 In the comment box, we’ll inject our malicious JavaScript payload. Use the same script as before:
 
@@ -51,7 +56,7 @@ In the comment box, we’ll inject our malicious JavaScript payload. Use the sam
 <script>alert(1)</script>
 ```
 
-##### Breakdown of the Payload:
+### Breakdown of the Payload:
 
 - `<script></script>`: HTML tags that define a block of JavaScript code.
 - `alert`: A JavaScript function that triggers a pop-up box.
@@ -59,11 +64,15 @@ In the comment box, we’ll inject our malicious JavaScript payload. Use the sam
 > [!Why This Works: ]
 > When you submit this comment, the payload is stored on the web server. Any user who visits the blog page will unknowingly execute this script in their browser.
 
-#### Submitting the Comment
+---
+
+## Submitting the Comment
 
 Paste the payload into the **Comment** field and click the button to post your comment. A confirmation or success message should appear, indicating your comment was successfully added.
 
-#### Seeing the Payload in Action
+---
+
+## Seeing the Payload in Action
 
 ![[images/Pasted image 20241228100206.png]]
 
