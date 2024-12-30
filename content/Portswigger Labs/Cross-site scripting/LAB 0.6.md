@@ -89,7 +89,7 @@ Replace `your-lab-url.com` with the actual lab URL provided. This payload sets t
 
 Visit the crafted URL in your browser. Once the page loads, the "Back" link will have its `href` attribute modified to `javascript:alert(1)`. Click on the "Back" link to trigger the JavaScript payload, and an alert box will appear displaying `1`.
 
-![[Pasted image 20241229191220.png]]
+![[images/Pasted image 20241229191220.png]]
 
 ---
 
