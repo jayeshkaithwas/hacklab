@@ -20,6 +20,7 @@ Please feel free to [provide feedback](https://github.com/jayeshkaithwas/hacklab
 ## Tools
 ---
 - [[BeEF]] (The Browser Exploitation Framework Project)
+- [[Nmap]]
 
 ## Exam Notes
 ---
