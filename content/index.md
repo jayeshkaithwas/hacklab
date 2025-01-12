@@ -12,16 +12,3 @@ description: Welcome to the Jayesh's HackLab.
 > Life is binary: zero and ones. 
 
 Please feel free to [provide feedback](https://github.com/jayeshkaithwas/hacklab/issues) regarding the accuracy of the notes, etc.
-
-## Notes
----
-- [[Status Codes]]
-
-## Tools
----
-- [[BeEF]] (The Browser Exploitation Framework Project)
-- [[Nmap]]
-
-## Exam Notes
----
-- [[CAP]] (Certified Appsec Practitioner)
