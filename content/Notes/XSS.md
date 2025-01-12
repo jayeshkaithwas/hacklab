@@ -126,6 +126,11 @@ One of my favorite methods to find a huge number of valid XSS vulnerabilities is
 ---
 The other list I wish to mention that I’ve used often is OWASP Evasion Cheat Sheet. During my engagements, when I run into an encoding problem this is usually the first place I look. The cheat sheet can be found here: https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet. The most common XSS protections I find are length issues and not allowing greater/less  han symbols. Luckily, the OWASP has any different examples to get around these issues.
 
+# Cross-site scripting (XSS) cheat sheet
+---
+This cross-site scripting (XSS) cheat sheet contains many vectors that can help you bypass WAFs and filters. You can select vectors by the event, tag or browser and a proof of concept is included for every vector.
+You can [download a PDF version of the XSS cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet.pdf).
+[CheetSheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 ## Commonly used by ME
 ---
 >[!Payloads]
