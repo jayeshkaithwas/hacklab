@@ -5,7 +5,7 @@ aliases:
 tags: 
 description:
 ---
-![[Pasted image 20250112085649.png]]
+![[images/Pasted image 20250112085649.png]]
 # Introduction
 ---
 Nmap (Network Mapper) is a powerful and versatile tool used by cybersecurity professionals, system administrators, and ethical hackers to discover hosts and services on a computer network. It allows users to map out networks, identify open ports, detect operating systems, and uncover vulnerabilities in a system's security posture.
