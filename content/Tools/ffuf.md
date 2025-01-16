@@ -8,6 +8,8 @@ tags:
 ---
 # FUZZing with FFUF
 
+![[images/Pasted image 20250116184413.png]]
+
 When it comes to penetration testing and bug bounty hunting, efficient fuzzing tools are indispensable. FFUF (Fuzz Faster U Fool) is one such powerhouse tool that lets you discover hidden directories, subdomains, and other endpoints with ease. This blog will dive into techniques for using FFUF to maximize its potential.
 
 ## Subdomain Enumeration
