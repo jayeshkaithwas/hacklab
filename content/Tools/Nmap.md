@@ -2,7 +2,9 @@
 title: Nmap
 aliases:
   - Nmap
-tags: 
+tags:
+  - Reconnaissance
+  - Scanning
 description:
 ---
 ![[images/Pasted image 20250112085649.png]]

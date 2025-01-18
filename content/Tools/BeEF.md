@@ -5,6 +5,7 @@ aliases:
 tags:
   - BeEF
   - XSS
+  - Installation
 description: BeEF is a security tool, allowing a penetration tester or system administrator additional attack vectors when assessing the posture of a target.
 ---
 ![[images/Pasted image 20241227174221.png]]
