@@ -2,6 +2,9 @@
 title: cd
 aliases:
   - cd
+tags:
+  - Linux
+  - Bash
 ---
 ![[images/Pasted image 20250120132722.png]]
 # Mastering Directory Navigation with Bash
@@ -94,7 +97,7 @@ Using `cd -` allows you to toggle between two directories without having to type
 
 ---
 
-#### **5. Directory Stack with `pushd` and `popd`**
+## **5. Directory Stack with `pushd` and `popd`**
 
 If you frequently need to navigate to multiple directories, `pushd` and `popd` can help you manage your location in a stack-like manner. Here's how it works:
 
@@ -131,7 +134,7 @@ This is a great way to manage and quickly switch between multiple directories wi
 
 ---
 
-#### **6. Auto-Correction for Typos in `cd` Command with `shopt -s cdspell`**
+## **6. Auto-Correction for Typos in `cd` Command with `shopt -s cdspell`**
 
 If you're prone to typos, Bash has a feature that automatically corrects your mistakes when you type directory names. This is enabled using the command `shopt -s cdspell`. For example:
 
