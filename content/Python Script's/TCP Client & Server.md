@@ -6,6 +6,7 @@ tags:
   - Python
   - Black-Hat-Python
 ---
+![[images/Pasted image 20250121095249.png]]
 When performing penetration tests, especially in environments with strict security controls, having a quick and simple way to test network services is invaluable. While many tools and compilers are not always available, Python provides an excellent way to create basic TCP clients and servers on the fly. In this blog post, we will walk you through the process of creating a TCP client and server in Python, which will help you in a variety of scenarios such as service testing, fuzzing, or even crafting proxies.
 
 # Building a Simple TCP Client in Python
