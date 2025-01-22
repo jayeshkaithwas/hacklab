@@ -2,6 +2,9 @@
 title: How an Auto-Commit Script Typically Works
 aliases:
   - How an Auto-Commit Script Typically Works
+tags:
+  - Python
+  - Bash
 ---
 
 ![[images/Pasted image 20250120145738.png]]

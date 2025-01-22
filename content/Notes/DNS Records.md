@@ -3,6 +3,7 @@ title: DNS Records
 aliases:
   - DNS Records
 description: "Understanding DNS Records: A Guide to A, AAAA, CNAME, TXT, SRV, MX, and NS Records"
+tags:
 ---
 # **Understanding DNS Records: A Guide to A, AAAA, CNAME, TXT, SRV, MX, and NS Records**
 

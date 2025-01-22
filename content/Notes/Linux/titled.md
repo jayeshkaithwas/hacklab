@@ -66,4 +66,25 @@ Nor made to court an amorous looking-glass;
 To strut before a wanton ambling nymph;
 I, that am curtail of this fair proportion,
 
+┌──(kali㉿kali)-[~]
+└─$ find /etc -name "*mail*"
+
+┌──(kali㉿kali)-[~]
+└─$ find / -type f -size +100M
+
+┌──(kali㉿kali)-[~]
+└─$ find . -mtime +30
+
+┌──(kali㉿kali)-[~]
+└─$ find . –mtime -5
+
+┌──(kali㉿kali)-[~]
+└─$ find / -type f -name *.tar.gz -size +100M -exec ls -l {}\;
+
+┌──(kali㉿kali)-[~]
+└─$ find / -type f -name *.tar.gz -size +100M -exec rm -f {}\;
+
+┌──(kali㉿kali)-[~]
+└─$ find /home/voldemortw -type f -mtime +60 | xargs tar -cvf
+/tmp/`date '+%d%m%Y'_archive.tar`
 ```
