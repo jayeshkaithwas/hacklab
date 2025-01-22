@@ -66,7 +66,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.DesktopOnly(Component.Graph(graphConfig)),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.RecentNotes({
-      title: "Now Reading",
+      title: "Recently Added",
       limit: 3,
       sort: (f1, f2) =>
         (f2.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER) -
