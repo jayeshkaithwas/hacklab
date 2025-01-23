@@ -34,7 +34,7 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/jayeshkaithwas/",
-      "LinkedIn": "https://www.linkedin.com/in/jayeshkaithwas/",
+      LinkedIn: "https://www.linkedin.com/in/jayeshkaithwas/",
     },
   }),
 }
@@ -69,8 +69,8 @@ export const defaultContentPageLayout: PageLayout = {
       title: "Recently Added",
       limit: 3,
       sort: (f1, f2) =>
-        (f2.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER) -
-        (f1.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER),
+        (f1.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER) -
+        (f2.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER),
     }),
   ],
 }
