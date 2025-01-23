@@ -85,6 +85,6 @@ I, that am curtail of this fair proportion,
 └─$ find / -type f -name *.tar.gz -size +100M -exec rm -f {}\;
 
 ┌──(kali㉿kali)-[~]
-└─$ find /home/voldemortw -type f -mtime +60 | xargs tar -cvf
+└─$ find /home/voldemort -type f -mtime +60 | xargs tar -cvf
 /tmp/`date '+%d%m%Y'_archive.tar`
 ```

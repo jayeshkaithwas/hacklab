@@ -2,6 +2,8 @@
 title: Google Dorking
 aliases:
   - Google Dorking
+tags:
+  - Reconnaissance
 ---
 
 ## site

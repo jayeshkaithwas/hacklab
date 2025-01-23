@@ -5,6 +5,7 @@ aliases:
 tags:
   - Linux
   - Bash
+description: Mastering Directory Navigation with Bash
 ---
 ![[images/Pasted image 20250120132722.png]]
 # Mastering Directory Navigation with Bash
