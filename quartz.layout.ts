@@ -68,9 +68,9 @@ export const defaultContentPageLayout: PageLayout = {
     Component.RecentNotes({
       title: "Recently Added",
       limit: 3,
-      sort: (f2, f1) =>
-        (f2.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER) -
-        (f1.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER),
+      sort: (f1, f2) =>
+        (f2.dates?.modified.getTime() ?? Number.MAX_SAFE_INTEGER) -
+        (f1.dates?.modified.getTime() ?? Number.MAX_SAFE_INTEGER),
     }),
   ],
 }

@@ -10,7 +10,7 @@ tags:
 description: "Lab: Stored DOM XSS"
 ---
 # Lab: Stored DOM XSS
-
+---
 [LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-stored)
 
 This lab demonstrates a stored DOM vulnerability in the blog comment functionality. To solve this lab, exploit this vulnerability to call the `alert()` function.
