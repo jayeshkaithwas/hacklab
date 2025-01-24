@@ -107,4 +107,4 @@ However, triggering `onresize` requires user interaction. To automate:
 ---
 #### Congratulations!
 
-You’ve successfully exploited the vulnerability and solved the lab! 
+You’ve successfully exploited the vulnerability and solved the lab!
