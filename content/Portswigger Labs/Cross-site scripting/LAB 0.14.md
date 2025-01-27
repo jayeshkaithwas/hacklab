@@ -90,14 +90,3 @@ The `onbegin` event works! Craft the final payload:
 Paste the payload into the search bar and click **Search**. You’ll see the `alert(1)` pop-up, confirming the XSS.
 
 ---
-
-## Conclusion
-
-Congratulations! You successfully solved the lab by identifying allowed tags and attributes to bypass the WAF.  
-This walkthrough demonstrated:
-
-- Testing tags using Burp Intruder.
-- Leveraging SVG and `animatetransform` for XSS.
-- Using minimal interaction payloads.
-
-Add images of the Burp Suite steps and the successful alert box to make your blog visually engaging. Happy learning! 🎉
