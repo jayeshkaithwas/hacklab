@@ -10,7 +10,7 @@ tags:
 description: "Lab: Reflected XSS with event handlers and href attributes blocked"
 ---
 
-# Lab: Reflected XSS into HTML Context with All Tags Blocked Except Custom Ones
+ # Lab: Reflected XSS with event handlers and `href` attributes blocked
 ---
 [LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-event-handlers-and-href-attributes-blocked)
 
