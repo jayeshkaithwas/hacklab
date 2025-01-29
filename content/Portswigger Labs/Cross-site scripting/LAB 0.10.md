@@ -7,6 +7,7 @@ tags:
   - Labs
   - DOM-Based
   - Practitioner
+  - Stored
 description: "Lab: Stored DOM XSS"
 ---
 # Lab: Stored DOM XSS

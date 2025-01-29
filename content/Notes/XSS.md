@@ -44,7 +44,12 @@ https://insecure-website.com/status?message=<script>/*+Bad+stuff+here...+*/</scr
 If the user visits the URL constructed by the attacker, then the attacker's script executes in the user's browser, in the context of that user's session with the application. At that point, the script can carry out any action, and retrieve any data, to which the user has access.
 
 For Hands-on Practice you can try to solve this **labs/ctfs**:
-- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded)  - WriteUp [[LAB 0.1|LAB 0.1]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded) - WriteUp [[LAB 0.1|LAB 0.1]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected) - Write-up [[LAB 0.9|LAB 0.9]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked) - Write-up [[LAB 0.11|LAB 0.11]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-all-standard-tags-blocked) - Write-up [[LAB 0.12|LAB 0.12]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-event-handlers-and-href-attributes-blocked) - Write-up [[LAB 0.13|LAB 0.13]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-some-svg-markup-allowed) - Write-up [[LAB 0.14|LAB 0.14]]
 
 ### **Stored cross-site scripting**
 
@@ -89,7 +94,8 @@ Any user who visits the blog post will now receive the following within the appl
 The script supplied by the attacker will then execute in the victim user's browser, in the context of their session with the application.
 
 For Hands-on Practice you can try to solve this **labs/ctfs**:
-- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/stored/lab-html-context-nothing-encoded)  - WriteUp [[LAB 0.2|LAB 0.2]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/stored/lab-html-context-nothing-encoded) - WriteUp [[LAB 0.2|LAB 0.2]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-stored) - Write-up [[LAB 0.10|LAB 0.10]]
 
 ### **DOM-based cross-site scripting**
 
@@ -118,6 +124,10 @@ For Hands-on Practice you can try to solve this **labs/ctfs**:
 - [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink-inside-select-element) - Write-up [[LAB 0.4|LAB 0.4]]
 - [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-innerhtml-sink) - Write-up [[LAB 0.5]]
 - [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-jquery-href-attribute-sink) - Write-up [[LAB 0.6|LAB 0.6]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-jquery-selector-hash-change-event) - Write-up [[LAB 0.7|LAB 0.7]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-angularjs-expression) - Write-up [[LAB 0.8|LAB 0.8]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected) - Write-up [[LAB 0.9|LAB 0.9]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-stored) - Write-up [[LAB 0.10|LAB 0.10]]
 ## Crowd Sourcing
 ---
 One of my favorite methods to find a huge number of valid XSS vulnerabilities is to visit http://www.reddit.com/r/xss. People will post on that sub-reddit the different XSS findings they have.

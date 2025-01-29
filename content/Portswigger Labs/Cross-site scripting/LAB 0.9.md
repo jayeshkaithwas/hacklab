@@ -7,6 +7,7 @@ tags:
   - Labs
   - DOM-Based
   - Practitioner
+  - Reflected
 description: "Lab: Reflected DOM XSS"
 ---
 # Lab: Reflected DOM XSS
