@@ -3,7 +3,7 @@ title: Python Basic
 aliases:
   - Python Basic
 ---
-cg,# Operators
+# Operators
 ---
 
 | Operator | Operation                           | Example | Evaluates to ... |
@@ -25,7 +25,7 @@ cg,# Operators
 | Floating-point numbers | -1.25, -1.0, --0.5, 0.0, 0.5, 1.0, 1.25 |
 | Strings                | 'a', 'aa', 'aaa', 'Hello!', '11 cats'   |
 >[!Note]
->The data type of `None` is `NoneType`.
+>The data type of  `None`  is  `NoneType`.
 
 # Variables
 ---
@@ -108,7 +108,7 @@ A *variable* is like a box in the computer’s memory where you can store a sing
 
 # Gauss's Clever Trick for Adding Numbers
 ---
-```
+```python
 total = 0
 for num in range(101):
 	total = total + num
@@ -130,8 +130,22 @@ So instead of adding each number one by one, Gauss figured out that if you have 
 
 So the total of all the numbers from 1 to 100 is 5050. Isn’t that a cool shortcut?  
 
-# from import Statements
+# `from` `import` Statements
 ---
 An alternative form of the import statement is composed of the `from` keyword, followed by the module name, the `import` keyword, and a star; for ­example, 
 `from random import *`.
 With this form of import statement, calls to functions in `random` will not need the `random.` prefix. However, using the full name makes for more readable code, so it is better to use the normal form of the `import` statement.
+
+# The Augmented Assignment Operators
+---
+
+| Augmented assignment statement | Equivalent assignment statement |
+| ------------------------------ | ------------------------------- |
+| spam = spam + 1                | spam += 1                       |
+| spam = spam - 1                | spam -= 1                       |
+| spam = spam * 1                | spam *= 1                       |
+| spam = spam / 1                | spam /= 1                       |
+| spam = spam % 1                | spam %= 1                       |
+
+
+![[Automate the Boring Stuff with Python.pdf]]
