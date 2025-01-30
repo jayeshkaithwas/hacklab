@@ -24,6 +24,8 @@ cg,# Operators
 | Integers               | -2, -1, 0, 1, 2, 3, 4, 5                |
 | Floating-point numbers | -1.25, -1.0, --0.5, 0.0, 0.5, 1.0, 1.25 |
 | Strings                | 'a', 'aa', 'aaa', 'Hello!', '11 cats'   |
+>[!Note]
+>The data type of `None` is `NoneType`.
 
 # Variables
 ---
@@ -45,14 +47,14 @@ A *variable* is like a box in the computer’s memory where you can store a sing
 - Variable names are case-sensitive, meaning that spam, SPAM, Spam, and sPaM are four different variables.
 
 >[!Questions]
- **Q. What is an expression made up of? What do all expressions do?**
- **Ans.** Expressions consist of values (such as 2) and operators (such as +), and they can always evaluate (that is, reduce) down to a single value. 
+ >**Q. What is an expression made up of? What do all expressions do?**
+ >**Ans.** Expressions consist of values (such as 2) and operators (such as +), and they can always evaluate (that is, reduce) down to a single value. 
  >
  >**Q. What tis the difference between an expression and statement?**
  >**Ans.** An expression evaluates to a single value. A statement does not.
 
 
-# Compatison Operators
+# Comparison Operators
 ---
 
 | Operator | Meaning                  |
@@ -63,6 +65,7 @@ A *variable* is like a box in the computer’s memory where you can store a sing
 | >        | Greater than             |
 | <=       | Less than or equal to    |
 | >=       | Greater than or equal to |
+|          |                          |
 >[!hint] Note
 >**The Difference Between the == and = Operators.** 
    You might have noticed that the == operator (equal to) has two equal signs, while the = operator (assignment) has just one equal sign. It’s easy to confuse these two operators with each other.
@@ -126,3 +129,9 @@ So instead of adding each number one by one, Gauss figured out that if you have 
 50 pairs × 101 = 5050.
 
 So the total of all the numbers from 1 to 100 is 5050. Isn’t that a cool shortcut?  
+
+# from import Statements
+---
+An alternative form of the import statement is composed of the `from` keyword, followed by the module name, the `import` keyword, and a star; for ­example, 
+`from random import *`.
+With this form of import statement, calls to functions in `random` will not need the `random.` prefix. However, using the full name makes for more readable code, so it is better to use the normal form of the `import` statement.
