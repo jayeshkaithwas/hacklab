@@ -148,4 +148,4 @@ With this form of import statement, calls to functions in `random` will not need
 | spam = spam % 1                | spam %= 1                       |
 
 
-![[Automate the Boring Stuff with Python.pdf]]
+![[images/Automate the Boring Stuff with Python.pdf]]
