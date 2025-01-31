@@ -35,15 +35,15 @@ A *variable* is like a box in the computer’s memory where you can store a sing
 2. It can use only letters,numbers, ans the underscore(_) character.
 3. It can't begin with a number.
 
-| Valid variable names | Invalid variable names                               |
-| -------------------- | ---------------------------------------------------- |
-| balance              | current-balance (hyphens are not allowed)            |
-| currentBalance       | current balance (spaces are not allowed)             |
-| current_balance      | 4account (can't begin with a number)                 |
-| _spam                | 42 (can't begin with a number)                       |
-| SPAM                 | total_$um (special character like $ are not allowed) |
-| account4             | 'hello' (special characters like ' are not allowed)  |
-|                      |                                                      |
+| Valid variable names | Invalid variable names                                 |
+| -------------------- | ------------------------------------------------------ |
+| balance              | current-balance (hyphens are not allowed)              |
+| currentBalance       | current balance (spaces are not allowed)               |
+| current_balance      | 4account (can't begin with a number)                   |
+| _spam                | 42 (can't begin with a number)                         |
+| SPAM                 | `total_$um` (special character like $ are not allowed) |
+| account4             | 'hello' (special characters like ' are not allowed)    |
+|                      |                                                        |
 - Variable names are case-sensitive, meaning that spam, SPAM, Spam, and sPaM are four different variables.
 
 >[!Questions]
@@ -65,7 +65,7 @@ A *variable* is like a box in the computer’s memory where you can store a sing
 | >        | Greater than             |
 | <=       | Less than or equal to    |
 | >=       | Greater than or equal to |
-|          |                          |
+
 >[!hint] Note
 >**The Difference Between the == and = Operators.** 
    You might have noticed that the == operator (equal to) has two equal signs, while the = operator (assignment) has just one equal sign. It’s easy to confuse these two operators with each other.
@@ -148,4 +148,91 @@ With this form of import statement, calls to functions in `random` will not need
 | spam = spam % 1                | spam %= 1                       |
 
 
-![[images/Automate the Boring Stuff with Python.pdf]]
+# References
+---
+```python
+>>> spam = 42
+>>> cheese = spam
+>>> spam = 100
+>>> spam
+100
+>>> cheese
+42
+```
+ 
+ You assign 42 to the  `spam`  variable, and then you copy the value in  `spam`  and assign it to the variable  `cheese` . When you later change the value in  `spam`  to 100, this doesn’t affect the value in  `cheese` . This is because  `spam`  and  `cheese`  are different variables that store different values.
+
+But lists don’t work this way. When you assign a list to a variable, you are actually assigning a list *reference* to the variable. A reference is a value that points to some bit of data, and a list reference is a value that points to a list. Here is some code that will make this distinction easier to understand.
+
+Enter this into the interactive shell:
+
+```python
+>>> spam = [0, 1, 2, 3, 4, 5]
+>>> cheese = spam
+>>> cheese[1] = 'Hello!'
+>>> spam
+[0, 'Hello!', 2, 3, 4, 5]
+>>> cheese
+[0, 'Hello!', 2, 3, 4, 5]
+```
+
+The code changed only the  `cheese`  list, but it seems that both the  `cheese`  and  `spam`  lists have changed. 
+
+When you create the list  `1`  , you assign a reference to it in the  `spam`  variable. But the next line  `2`  copies only the list reference in  `spam`  to  `cheese` , not the list value itself. This means the values stored in  `spam`  and  `cheese`  now both refer to the same list. There is only one underlying list because the list itself was never actually copied. So when you modify the first element of  `cheese`  `3` , you are modifying the same list that  `spam`  refers to.
+
+Using boxes as a metaphor for variables, this Figures shows what happens when a list is assigned to the  `spam`  variable.
+
+![[images/Pasted image 20250131123115.png]]
+
+![[images/Pasted image 20250131123146.png]]
+
+![[images/Pasted image 20250131123203.png]]
+
+
+>[!Questions]
+ >**Q. Name a few ways that list values are similar to string values.**
+ >**Ans.** Both lists and strings can be passed to  `len()`, have *indexes* and *slices*, be used in  `for`   loops, be concatenated or replicated, and be used with the  `in`  and  `not in`  operators.
+ >
+ >**Q. How do you type the tuple value that has just the integer value 42 in it?**
+ >**Ans.** (42,) (The trailing comma is mandatory.)
+ >
+ >**Q. What is the difference between copy.copy() and copy.deepcopy()?**
+ >**Ans.** Python provides the copy module to create actual copies which offer functions for  **shallow `(copy.copy())`**  and **deep `(copy. deepcopy ())`**  copies.
+ >
+ >- A **shallow copy** creates a new object but retains references to the objects contained within the original. It only copies the top-level structure without duplicating nested elements.
+ >- Changes made to a copy of an object do reflect in the original object. In python, this is implemented using the ****“copy.copy()”**** function.
+ >
+ >	![[images/Pasted image 20250131131550.png]]
+ >
+ >***Example:***
+ >
+>```python
+>>>> import copy
+>>>> a = [[1, 2, 3], [4, 5, 6]]
+>>>> b = copy.copy(a)
+>>>> b[0][0] = 0
+>>>> a
+[[0, 2, 3], [4, 5, 6]]
+>>>> b
+[[0, 2, 3], [4, 5, 6]]
+>```
+>
+>- A **deep copy** creates a new compound object before inserting copies of the items found in the original into it in a recursive manner.
+>- It will first construct a new collection object and then recursively populate it with copies of the child objects found in the original. It means that any changes made to a copy of the object do not reflect in the original object.
+>  
+> 	 ![[images/Pasted image 20250131132232.png]]
+>  
+>***Example:***
+>  
+>```python
+>>>> import copy
+>>>> a = [[1, 2, 3], [4, 5, 6]]
+>>>> b = copy.deepcopy(a)
+>>>> b[0][0] = 0
+>>>> a
+[[1, 2, 3], [4, 5, 6]]
+>>>> b
+[[0, 2, 3], [4, 5, 6]]
+>```
+
+ 

