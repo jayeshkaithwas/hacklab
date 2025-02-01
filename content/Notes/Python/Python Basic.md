@@ -208,9 +208,9 @@ Using boxes as a metaphor for variables, this Figures shows what happens when a 
  >
  >```python
  >>>> import copy
- >>>> a = `[[1, 2, 3], [4, 5, 6]]`
+ >>>> a = [[1, 2, 3], [4, 5, 6]]
  >>>> b = copy.deepcopy(a)
- >>>> b`[0][0]`= 0
+ >>>> b[0][0]= 0
  >>>> a
  > `[[0, 2, 3], [4, 5, 6]]`
  >>>> b
@@ -226,9 +226,9 @@ Using boxes as a metaphor for variables, this Figures shows what happens when a 
  >  
  >```python
  >>>> import copy
- >>>> a = `[[1, 2, 3], [4, 5, 6]]`
+ >>>> a = [[1, 2, 3], [4, 5, 6]]
  >>>> b = copy.deepcopy(a)
- >>>> b`[0][0]` = 0
+ >>>> b[0][0] = 0
  >>>> a
  > `[[1, 2, 3], [4, 5, 6]]`
  >>>> b
