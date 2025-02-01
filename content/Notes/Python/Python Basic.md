@@ -206,33 +206,33 @@ Using boxes as a metaphor for variables, this Figures shows what happens when a 
  >
  >***Example:***
  >
->```python
->>>> import copy
->>>> a = [[1, 2, 3], [4, 5, 6]]
->>>> b = copy.copy(a)
->>>> b[0][0] = 0
->>>> a
-[[0, 2, 3], [4, 5, 6]]
->>>> b
-[[0, 2, 3], [4, 5, 6]]
->```
->
->- A **deep copy** creates a new compound object before inserting copies of the items found in the original into it in a recursive manner.
->- It will first construct a new collection object and then recursively populate it with copies of the child objects found in the original. It means that any changes made to a copy of the object do not reflect in the original object.
->  
-> 	 ![[images/Pasted image 20250131132232.png]]
->  
->***Example:***
->  
->```python
->>>> import copy
->>>> a = [[1, 2, 3], [4, 5, 6]]
->>>> b = copy.deepcopy(a)
->>>> b[0][0] = 0
->>>> a
-[[1, 2, 3], [4, 5, 6]]
->>>> b
-[[0, 2, 3], [4, 5, 6]]
->```
+ >```python
+ >>>> import copy
+ >>>> a = [[1, 2, 3], [4, 5, 6]]
+ >>>> b = copy.copy(a)
+ >>>> b[0][0] = 0
+ >>>> a
+ > [[0, 2, 3], [4, 5, 6]]
+ >>>> b
+ > [[0, 2, 3], [4, 5, 6]]
+ >```
+ >
+ >- A **deep copy** creates a new compound object before inserting copies of the items found in the original into it in a recursive manner.
+ >- It will first construct a new collection object and then recursively populate it with copies of the child objects found in the original. It means that any changes made to a copy of the object do not reflect in the original object.
+ >  
+ > 	 ![[images/Pasted image 20250131132232.png]]
+ >  
+ >***Example:***
+ >  
+ >```python
+ >>>> import copy
+ >>>> a = [[1, 2, 3], [4, 5, 6]]
+ >>>> b = copy.deepcopy(a)
+ >>>> b[0][0] = 0
+ >>>> a
+ > [[1, 2, 3], [4, 5, 6]]
+ >>>> b
+ > [[0, 2, 3], [4, 5, 6]]
+ >```
 
  
