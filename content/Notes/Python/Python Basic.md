@@ -2,6 +2,8 @@
 title: Python Basic
 aliases:
   - Python Basic
+tags:
+  - Python
 ---
 # Operators
 ---
@@ -24,7 +26,7 @@ aliases:
 | Integers               | -2, -1, 0, 1, 2, 3, 4, 5                |
 | Floating-point numbers | -1.25, -1.0, --0.5, 0.0, 0.5, 1.0, 1.25 |
 | Strings                | 'a', 'aa', 'aaa', 'Hello!', '11 cats'   |
->[!Note]
+>[!Hint] Note
 >The data type of  `None`  is  `NoneType`.
 
 # Variables
@@ -43,7 +45,6 @@ A *variable* is like a box in the computer’s memory where you can store a sing
 | _spam                | 42 (can't begin with a number)                         |
 | SPAM                 | `total_$um` (special character like $ are not allowed) |
 | account4             | 'hello' (special characters like ' are not allowed)    |
-|                      |                                                        |
 - Variable names are case-sensitive, meaning that spam, SPAM, Spam, and sPaM are four different variables.
 
 >[!Questions]
@@ -235,4 +236,3 @@ Using boxes as a metaphor for variables, this Figures shows what happens when a 
  > `[[0, 2, 3], [4, 5, 6]]`
  >```
 
- 

@@ -220,6 +220,15 @@ Below, you'll find a curated list of essential Nmap commands categorized for var
     ```bash
     nmap -p 389 --script ldap-brute --script-args ldap.base='"cn=users,dc=CEH,dc=com"' {target_IP}
     ```
+	
+4. **Scan all ports**
     
+  ```bash
+    nmap -p- --min-rate=10000 -oG scan-allports {target_IP}
+	# -p-              --> All ports
+	# --min-rate=10000 --> Not to take more than 10000 mili sec on a port.
+	# -oG              --> Greapable output.
+	# scan-allports    --> File name where output should save.
+    ```
 
-These Nmap commands empower security professionals to explore network vulnerabilities, assess security configurations, and conduct detailed reconnaissance during penetration testing exercises. Always ensure that scans and tests are conducted ethically and with proper authorization.
+These Nmap commands empower security professionals to explore network vulnerabilities, assess security configurations, and conduct detailed reconnaissance during penetration testing exercises. Always ensure that scans and tests are conducted ethically and with proper authorization.0g
