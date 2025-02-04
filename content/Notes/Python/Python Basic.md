@@ -26,7 +26,7 @@ tags:
 | Integers               | -2, -1, 0, 1, 2, 3, 4, 5                |
 | Floating-point numbers | -1.25, -1.0, --0.5, 0.0, 0.5, 1.0, 1.25 |
 | Strings                | 'a', 'aa', 'aaa', 'Hello!', '11 cats'   |
->[!Hint] Note
+>[!info] Note
 >The data type of  `None`  is  `NoneType`.
 
 # Variables
@@ -47,7 +47,7 @@ A *variable* is like a box in the computer’s memory where you can store a sing
 | account4             | 'hello' (special characters like ' are not allowed)    |
 - Variable names are case-sensitive, meaning that spam, SPAM, Spam, and sPaM are four different variables.
 
->[!Questions]
+>[!check] Questions
  >**Q. What is an expression made up of? What do all expressions do?**
  >**Ans.** Expressions consist of values (such as 2) and operators (such as +), and they can always evaluate (that is, reduce) down to a single value. 
  >
@@ -67,7 +67,7 @@ A *variable* is like a box in the computer’s memory where you can store a sing
 | <=       | Less than or equal to    |
 | >=       | Greater than or equal to |
 
->[!hint] Note
+>[!tip] 
 >**The Difference Between the == and = Operators.** 
    You might have noticed that the == operator (equal to) has two equal signs, while the = operator (assignment) has just one equal sign. It’s easy to confuse these two operators with each other.
 
@@ -190,7 +190,7 @@ Using boxes as a metaphor for variables, this Figures shows what happens when a 
 ![[images/Pasted image 20250131123203.png]]
 
 
->[!Questions]
+>[!check] Question
  >**Q. Name a few ways that list values are similar to string values.**
  >**Ans.** Both lists and strings can be passed to  `len()`, have *indexes* and *slices*, be used in  `for`   loops, be concatenated or replicated, and be used with the  `in`  and  `not in`  operators.
  >
@@ -236,3 +236,475 @@ Using boxes as a metaphor for variables, this Figures shows what happens when a 
  > `[[0, 2, 3], [4, 5, 6]]`
  >```
 
+
+# Comma Code
+---
+Say you have a list value like this:
+`spam = ['apples', 'bananas', 'tofu', 'cats']`
+Write a function that takes a list value as an argument and returns a string with all the items separated by a comma and a space, with *and* inserted before the last item. For example, passing the previous `spam` list to the function would return `'apples, bananas, tofu, and cats'`. But your function should be able to work with any list value passed to it.
+
+## Solution
+```python
+spam = ['apples', 'bananas', 'tofu', 'cats']
+def function(line):
+    result = ''
+    for i in line:
+        if i == line[-1]:
+            result += 'and '+i
+        else:
+            result += i+', '
+    return result
+print(function(spam))
+
+#OUTPUT
+apples, bananas, tofu, and cats
+```
+
+
+# Character Picture Grid
+---
+Say you have a list of lists where each value in the inner lists is one-character string, like this:
+```
+grid = [['.', '.', '.', '.', '.', '.'],
+		['.', 'O', 'O', '.', '.', '.'],
+		['O', 'O', 'O', 'O', '.', '.'],
+		['O', 'O', 'O', 'O', 'O', '.'],
+		['.', 'O', 'O', 'O', 'O', 'O'],
+		['O', 'O', 'O', 'O', 'O', '.'],
+		['O', 'O', 'O', 'O', '.', '.'],
+		['.', 'O', 'O', '.', '.', '.'],
+		['.', '.', '.', '.', '.', '.']]
+```
+You can think of `grid[x][y]` as being the character at the x- and y-­coordinates of a picture” drawn with text characters. The (0, 0) origin will be in the upper-left corner, the x-coordinates increase going right, and w the y-coordinates increase going down. 
+Copy the previous grid value, and write code that uses it to print the image.
+```
+..OO.OO..
+.OOOOOOO.
+.OOOOOOO.
+..OOOOO..
+...OOO...
+....O....
+```
+## Solution
+```python
+grid = [['.', '.', '.', '.', '.', '.'],
+['.', 'O', 'O', '.', '.', '.'],
+['O', 'O', 'O', 'O', '.', '.'],
+['O', 'O', 'O', 'O', 'O', '.'],
+['.', 'O', 'O', 'O', 'O', 'O'],
+['O', 'O', 'O', 'O', 'O', '.'],
+['O', 'O', 'O', 'O', '.', '.'],
+['.', 'O', 'O', '.', '.', '.'],
+['.', '.', '.', '.', '.', '.']]
+
+for i in range(6):
+    for j in range(9):
+        print(grid[j][i], end='')
+    print()
+
+```
+
+
+# Dictionary
+---
+## Dictionaries vs. Lists
+
+Unlike lists, items in dictionaries are **unordered**.
+```python
+>>> spam = ['cats', 'dogs', 'moose']
+>>> bacon = ['dogs', 'moose', 'cats']
+>>> spam == bacon
+False
+>>> eggs = {'name': 'Zophie', 'species': 'cat', 'age': '8'}
+>>> ham = {'species': 'cat', 'age': '8', 'name': 'Zophie'}
+>>> eggs == ham
+True
+```
+
+## The *keys()*, *values()*, and *items()* Methods
+
+```python
+>>> spam = {'color': 'red', 'age': 42}
+>>> for v in spam.values():
+		print(v)
+red
+42
+
+>>> for k in spam.keys():
+print(k)
+color
+age
+
+>>> for i in spam.items():
+print(i)
+('color', 'red')
+('age', 42)
+```
+
+>[!info] Note
+>The values in the  `dict_items`  value returned by the  `items()`  method are
+**tuples** of the key and value.
+
+```python
+>>> spam = {'color': 'red', 'age': 42}
+>>> spam.keys()
+dict_keys(['color', 'age'])
+>>> list(spam.keys())
+['color', 'age']
+```
+
+The  `list(spam.keys())`  line takes the **dict_keys** value returned from  `keys()` and passes it to  `list()` , which then returns a list value of  `['color', 'age']`.
+
+## The *get()* Method
+
+It’s tedious to check whether a key exists in a dictionary before accessing that key’s value. Fortunately, dictionaries have a  `get()`  method that takes **two** arguments: the key of the value to retrieve and a fallback value to return if that key does not exist.
+
+```python
+>>> picnicItems = {'apples': 5, 'cups': 2}
+>>> 'I am bringing ' + str(picnicItems.get('cups', 0)) + ' cups.'
+'I am bringing 2 cups.'
+>>> 'I am bringing ' + str(picnicItems.get('eggs', 0)) + ' eggs.'
+'I am bringing 0 eggs.'
+```
+
+
+## The *setdefault()* Method
+
+You’ll often have to set a value in a dictionary for a certain key only if that key does not already have a value. The code looks something like this:
+```python
+spam = {'name': 'Pooka', 'age': 5}
+if 'color' not in spam:
+	spam['color'] = 'black'
+```
+The  `setdefault()`  method offers a way to do this in one line of code. The first argument passed to the method is the key to check for, and the second argument is the value to set at that key ==if the key does not exist==. If the key does exist, the  `setdefault()`  method returns the key’s value. Enter the following into the interactive shell:
+```python
+>>> spam = {'name': 'Pooka', 'age': 5}
+>>> spam.setdefault('color', 'black')
+'black'
+>>> spam
+{'color': 'black', 'age': 5, 'name': 'Pooka'}
+>>> spam.setdefault('color', 'white')
+'black'
+>>> spam
+{'color': 'black', 'age': 5, 'name': 'Pooka'}
+```
+
+### characterCount.py
+
+```python
+message = 'It was a bright cold day in April, and the clocks were striking thirteen.'
+count = {}
+for character in message:
+	count.setdefault(character, 0)
+	count[character] = count[character] + 1
+print(count)
+```
+
+#### Output
+``` python
+{' ': 13, ',': 1, '.': 1, 'A': 1, 'I': 1, 'a': 4, 'c': 3, 'b': 1, 'e': 5, 'd': 3, 'g': 2, 'i': 6, 'h': 3, 'k': 2, 'l': 3, 'o': 2, 'n': 4, 'p': 1, 's': 3, 'r': 5, 't': 6, 'w': 2, 'y': 1}
+```
+
+## Pretty Printing
+
+```python
+import pprint
+message = 'It was a bright cold day in April, and the clocks were striking thirteen.'
+count = {}
+for i in message:
+	count.setdefault(i, 0)
+	count[i] = count[i] + 1
+pprint.pprint(count)
+
+# OUTPUT
+{' ': 13,
+ ',': 1,
+ '.': 1,
+ 'A': 1,
+ 'I': 1,
+ 'a': 4,
+ 'b': 1,
+ 'c': 3,
+ 'd': 3,
+ 'e': 5,
+ 'g': 2,
+ 'h': 3,
+ 'i': 6,
+ 'k': 2,
+ 'l': 3,
+ 'n': 4,
+ 'o': 2,
+ 'p': 1,
+ 'r': 5,
+ 's': 3,
+ 't': 6,
+ 'w': 2,
+ 'y': 1}
+```
+
+
+# A Tic-Tac-Toe Board
+---
+![[images/Pasted image 20250204130042.png]]
+
+```python
+# Board Initialization
+theBoard = {'top-L': ' ', 'top-M': ' ', 'top-R': ' ',
+			'mid-L': ' ', 'mid-M': ' ', 'mid-R': ' ',
+			'low-L': ' ', 'low-M': ' ', 'low-R': ' '}
+
+# Printing the Board
+def printBoard(board):
+	print(board['top-L'] + '|' + board['top-M'] + '|' + board['top-R'])
+	print('-+-+-')
+	print(board['mid-L'] + '|' + board['mid-M'] + '|' + board['mid-R'])
+	print('-+-+-')
+	print(board['low-L'] + '|' + board['low-M'] + '|' + board['low-R'])
+
+# Checking for a Win
+def checkWin(board):
+	winning_combinations = [
+		['top-L', 'top-M', 'top-R'], 
+		['mid-L', 'mid-M', 'mid-R'], 
+		['low-L', 'low-M', 'low-R'], 
+		['top-L', 'mid-L', 'low-L'], 
+		['top-M', 'mid-M', 'low-M'], 
+		['top-R', 'mid-R', 'low-R'], 
+		['top-L', 'mid-M', 'low-R'], 
+		['top-R', 'mid-M', 'low-L']
+	]
+	for i in winning_combinations:
+		if board[i[0]] == board[i[1]] == board[i[2]] and board[i[0]] != ' ':
+			return board[i[0]]
+	return None
+
+# Checking if the Board is Full
+def isBoardFull(board):
+	for value in Board.values():
+		if value == '':
+			return False
+		return True
+
+# Getting a Vaild Move
+def getValidMove():
+	move = input()
+	while move not in theBoard or theBoard[move] != ' ':
+		print("Invallid mmove. Please choose an empty spot.")
+		move = input()
+	return move
+
+# Game Loop
+turn = 'X'
+while True:
+	printBoard(theBoard)
+	print('Turn for ' + turn + '. Move on which space?')
+	move = getValidMove()
+	theBoard[move] = turn
+	
+	winner = checkWin(theBoard)
+	if winner:
+		print(f"Player {winner} wins!")
+		break
+	
+	if isBoardFull(theBoard):
+		printBoard(theBoard)
+		print("It's a tie!")
+		break
+		
+	if turn == 'X':
+		turn = 'O'
+	else:
+		turn = 'X'
+```
+
+>[!check] Questions
+>**Q. If a dictionary is stored in spam, what is the difference between the expressions  =='cat' in spam==  and  =='cat' in spam.keys()==?**
+>**Ans.** There is no difference. The in operator checks whether a value exists as a key in the dictionary.
+>
+>**Q. If a dictionary is stored in spam, what is the difference between the expressions =='cat' in spam== and =='cat' in spam.values()==?**
+>**Ans.** `'cat' in spam`  checks whether there is a **'cat'** key in the dictionary, while `'cat' in spam.values()`  checks whether there is a value 'cat' for one of the keys in spam.
+
+# String
+---
+## Escape Characters
+
+| Escape character | Prints as            |
+| ---------------- | -------------------- |
+| `\'`             | Single quote         |
+| `\''`            | Double quote         |
+| `\t`             | tab                  |
+| `\n`             | Newline (line break) |
+| `\\`             | Backslash            |
+
+## Raw Strings
+
+```python
+>>> print(r'That is Carol\'s cat.')
+That is Carol\'s cat.
+```
+
+## The *isX* String Methods
+
+Here are some common isX string methods:
+
+- `isalpha()` returns ==True== if the string consists only of letters and is not blank.
+- `isalnum()` returns ==True== if the string consists only of letters and numbers and is not blank.
+- `isdecimal()` returns ==True== if the string consists only of numeric characters and is not blank.
+- `isspace()` returns ==True== if the string consists only of spaces, tabs, and newlines and is not blank.
+- `istitle()` returns ==True== if the string consists only of words that begin with an uppercase letter followed by only lowercase letters.
+
+```python
+>>> 'hello'.isalpha()
+True
+>>> 'hello123'.isalpha()
+False
+>>> 'hello123'.isalnum()
+True
+>>> 'hello'.isalnum()
+True
+>>> '123'.isdecimal()
+True
+>>> '
+'.isspace()
+True
+>>> 'This Is Title Case'.istitle()
+True
+>>> 'This Is Title Case 123'.istitle()
+True
+>>> 'This Is not Title Case'.istitle()
+False
+>>> 'This Is NOT Title Case Either'.istitle()
+False
+```
+
+
+## The *startswith()* and *endswith()* String Methods
+
+```python
+>>> 'Hello world!'.startswith('Hello')
+True
+>>> 'Hello world!'.endswith('world!')
+True
+>>> 'abc123'.startswith('abcdef')
+False
+>>> 'abc123'.endswith('12')
+False
+>>> 'Hello world!'.startswith('Hello world!')
+True
+>>> 'Hello world!'.endswith('Hello world!')
+True
+```
+
+>[!tip]
+> **There methods are useful alternatives to the  `==`  equals operator if you need to check only whether the first or last part of the string, rather than the whole thing, is equal to another string.**
+
+
+## The *join()* and *split()* String Methods
+
+```python
+>>> ', '.join(['cats', 'rats', 'bats'])
+'cats, rats, bats'
+>>> ' '.join(['My', 'name', 'is', 'Simon'])
+'My name is Simon'
+>>> 'ABC'.join(['My', 'name', 'is', 'Simon'])
+'MyABCnameABCisABCSimon'
+
+
+>>> 'My name is Simon'.split()
+['My', 'name', 'is', 'Simon']
+
+
+>>> 'MyABCnameABCisABCSimon'.split('ABC')
+['My', 'name', 'is', 'Simon']
+>>> 'My name is Simon'.split('m')
+['My na', 'e is Si', 'on']
+
+
+>>> spam = '''Dear Alice,
+How have you been? I am fine.
+There is a container in the fridge
+that is labeled "Milk Experiment".
+Please do not drink it.
+Sincerely,
+Bob'''
+>>> spam.split('\n')
+['Dear Alice,', 'How have you been? I am fine.', 'There is a container in the
+fridge', 'that is labeled "Milk Experiment".', '', 'Please do not drink it.',
+'Sincerely,', 'Bob']
+```
+
+## Justifying Text with *rjust()*, *ljust*, and *center()*
+ 
+```python
+>>> 'Hello'.rjust(10)
+'     Hello'
+>>> 'Hello'.rjust(20)
+'               Hello'
+>>> 'Hello World'.rjust(20)
+'         Hello World'
+
+>>> 'Hello'.ljust(10)
+'Hello     '
+
+>>> 'Hello'.rjust(20,'*')
+'***************Hello'
+>>> 'Hello'.ljust(20,'-')
+'Hello---------------'
+
+>>> 'Hello'.center(20)
+'       Hello        '
+>>> 'Hello'.center(20,'=')
+'=======Hello========'
+```
+
+>[!Example]
+>```python
+>def printPicnic(itemsDict, leftWidth, rightWidth):
+>	print('PICNIC ITEMS'.center(leftWidth + rightWidth, '-'))
+>	for k, v in itemsDict.items():
+>		print(k.ljust(leftWidth, '.') + str(v).rjust(rightWidth))
+>picnicItems = {'sandwiches': 4, 'apples': 12, 'cups': 4, 'cookies': 8000}
+>printPicnic(picnicItems, 12, 5)
+>printPicnic(picnicItems, 20, 6)
+>
+># OUTPUT
+>---PICNIC ITEMS--
+>sandwiches..    4
+>apples......   12
+>cups........    4
+>cookies..... 8000
+>-------PICNIC ITEMS-------
+>sandwiches..........     4
+>apples..............    12
+>cups................     4
+>cookies.............  8000
+>```
+
+## Removing Whitespace with *strip()*, *rstrip()*, and *lstrip()*
+
+```python
+>>> spam = '     Hello World     '
+>>> spam.strip()
+'Hello World'
+>>> spam.lstrip()
+'Hello World     '
+>>> spam.rstrip()
+'     Hello World'
+
+>>> spam = 'SpamSpamBaconSpamEggsSpamSpam'
+>>> spam.strip('ampS')
+'BaconSpamEggs'
+```
+
+## Copying and Pasting Strings with the pyperclip Module
+
+```python
+>>> import pyperclip
+>>> pyperclip.copy('Hello world!')
+>>> pyperclip.paste()
+'Hello world!'
+
+>>> pyperclip.paste()
+'For example, if I copied this sentence to the clipboard and then called
+paste(), it would look like this:'
+```
