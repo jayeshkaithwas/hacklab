@@ -28,35 +28,14 @@ Attempt a basic XSS payload, like:
 <img src=0 onerror=alert(1)>
 ```
 
-The response will indicate that the `<img>` tag is blocked by the Web Application Firewall (WAF).
+![[images/Pasted image 20250212120042.png]]
+The response indicate that the `<img>` tag is blocked by the Web Application Firewall (WAF).
 
 ---
 
-### 2. **Testing Allowed Tags Using Burp Intruder**
+### 2. **Identifying Valid Tags**
 
-#### Step 1: Send the Request to Intruder
-
-- Open Burp Suite and navigate to the **Target** tab.
-- Locate the search request, right-click, and select **Send to Intruder**.
-
-#### Step 2: Modify the Request
-
-- Replace the search string with empty angle brackets (`<>`) and add Intruder markers:
-    
-    ```html
-    GET /?search=<§§> HTTP/1.1
-    ```
-    
-
-#### Step 3: Add Payloads
-
-- Go to the **Payloads** tab in Intruder.
-- Copy tags from the [XSS Cheat Sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet) and paste them into the payload list.
-
-#### Step 4: Start the Attack
-
-- Click the **Start Attack** button.
-- Filter the results by status code `200` to identify tags that bypass the WAF.
+The first step is to identify which HTML tags are allowed. Using an Burp Suite or manual testing as we have done in [[LAB 0.11#Step 2 Identify Allowed Tags]], you can find a list of valid tags.
 
 ---
 
@@ -64,29 +43,20 @@ The response will indicate that the `<img>` tag is blocked by the Web Applicatio
 
 From the results, `<svg>` is allowed along with the `animatetransform` element.
 
-#### Step 1: Test Events on `animatetransform`
-
-- Update the Intruder request:
-    
-    ```html
-    GET /?search=<svg><animateTransform%20§§=1> HTTP/1.1
-    ```
-    
-- Copy all events from the XSS Cheat Sheet and paste them as payloads.
-- Start the attack and look for a status code `200`.
-
-#### Step 2: Use the Allowed Event
-
-The `onbegin` event works! Craft the final payload:
+- The `onbegin` event works! Craft the final payload:
 
 ```html
 <svg><animateTransform onbegin='alert(1)'>
 ```
+
+![[images/Pasted image 20250212120848.png]]
 
 ---
 
 ### 4. **Trigger the XSS**
 
 Paste the payload into the search bar and click **Search**. You’ll see the `alert(1)` pop-up, confirming the XSS.
+
+![[images/Pasted image 20250212121019.png]]
 
 ---
