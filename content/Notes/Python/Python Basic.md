@@ -133,8 +133,7 @@ So the total of all the numbers from 1 to 100 is 5050. Isn’t that a cool short
 
 # `from` `import` Statements
 ---
-An alternative form of the import statement is composed of the `from` keyword, followed by the module name, the `import` keyword, and a star; for ­example, 
-`from random import *`.
+An alternative form of the import statement is composed of the `from` keyword, followed by the module name, the `import` keyword, and a star; for ­example, `from random import *`.
 With this form of import statement, calls to functions in `random` will not need the `random.` prefix. However, using the full name makes for more readable code, so it is better to use the normal form of the `import` statement.
 
 # The Augmented Assignment Operators
@@ -708,3 +707,41 @@ fridge', 'that is labeled "Milk Experiment".', '', 'Please do not drink it.',
 'For example, if I copied this sentence to the clipboard and then called
 paste(), it would look like this:'
 ```
+
+
+# Project : Password Locker
+---
+```python
+#! python
+# pw.py - An insecure password locker program.
+
+PASSWORDS = {'email' : 'F7minlBDDuvMJuxESSKHFhTxFtjVB6',
+			'blog': 'VmALvQyKAxiVH5G8v01if1MLZF3sdt',
+			'luggage': '12345'}
+
+import sys,pyperclip
+
+if len(sys.argv) < 2:
+	print('Usage: python pw.py [account] - copy account password')
+	sys.exit()
+
+account = sys.argv[1]
+
+if account in PASSWORDS:
+	pyperclip.copy(PASSWORDS[account])
+	print('Password for ' + account + ' copied to clipboard.')
+else:
+	print('There is no account named ' + account)
+```
+
+## OUTPUT
+```bash
+┌──(venv3)(voldemort🔥IdeaPad)-[~]
+└─$ python pe.py email
+Password for emailcopied to clipboard.
+
+┌──(venv3)(voldemort🔥IdeaPad)-[~]
+└─$ python pe.py blog
+Password for blogcopied to clipboard.
+```
+	
