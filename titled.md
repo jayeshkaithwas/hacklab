@@ -22,10 +22,6 @@ bin:x:2:2:bin:/bin:/usr/sbin/nologin
 kali:x:1000:1000:,,,:/home/kali:/usr/bin/zsh
 
 ┌──(kali㉿kali)-[~]
-└─$ grep -i Kali /etc/passwd
-kali:x:1000:1000:,,,:/home/kali:/usr/bin/zsh
-
-┌──(kali㉿kali)-[~]
 └─$ grep -ri kali /tmp      
 /tmp/dir1/test.txt:Hi Kali,
 /tmp/users.txt:Kali
