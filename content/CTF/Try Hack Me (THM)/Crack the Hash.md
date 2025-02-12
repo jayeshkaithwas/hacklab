@@ -2,13 +2,16 @@
 title: Crack the Hash
 aliases:
   - Crack the Hash
-tags: 
+tags:
+  - Easy
+  - CTF
 description: Cracking hashes challenges
 ---
 # Introduction
 
 The "Crack the Hash" room on TryHackMe is designed to teach participants how to identify and crack various hashed passwords using different techniques and tools like **Hashcat**, **John the Ripper**, and **online hash lookup databases**. This write-up provides step-by-step solutions for the challenges presented in the room.
 
+[LAB](https://tryhackme.com/room/crackthehash)
 # Level 1
 ---
 
