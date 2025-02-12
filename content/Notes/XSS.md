@@ -50,6 +50,7 @@ For Hands-on Practice you can try to solve this **labs/ctfs**:
 - [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-all-standard-tags-blocked) - Write-up [[LAB 0.12|LAB 0.12]]
 - [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-event-handlers-and-href-attributes-blocked) - Write-up [[LAB 0.13|LAB 0.13]]
 - [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-some-svg-markup-allowed) - Write-up [[LAB 0.14|LAB 0.14]]
+- [Portswigger LAB](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-attribute-angle-brackets-html-encoded) - Write-up [[LAB 0.15|LAB 0.15]]
 
 ### **Stored cross-site scripting**
 
