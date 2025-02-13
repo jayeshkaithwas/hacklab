@@ -709,8 +709,8 @@ paste(), it would look like this:'
 ```
 
 
-# Project : Password Locker
----
+### Project : Password Locker
+
 ```python
 #! python
 # pw.py - An insecure password locker program.
@@ -734,14 +734,50 @@ else:
 	print('There is no account named ' + account)
 ```
 
-## OUTPUT
+#### OUTPUT
+
 ```bash
 ┌──(venv3)(voldemort🔥IdeaPad)-[~]
-└─$ python pe.py email
+└─$ python pw.py email
 Password for emailcopied to clipboard.
 
 ┌──(venv3)(voldemort🔥IdeaPad)-[~]
-└─$ python pe.py blog
+└─$ python pw.py blog
 Password for blogcopied to clipboard.
 ```
-	
+
+### Project : Adding Bullets to Wiki Markup
+
+```python
+#! python3
+# bulletPointAdder.py - Adds Wikipedia bullet points to the start of each line of text on the clipboard
+
+import pyperclip
+text = pyperclip.paste()
+
+#Seperate lines and add stars.
+lines = text.split('\n')
+for i in range(len(lines)): # loop through all indexes for "lines" list
+	lines[i] = '* ' + lines[i] # add start to each string in "lines" list
+
+text = '\n'.join(lines)
+pyperclip.copy(text)
+```
+
+#### OUTPUT
+```bash
+#COPIED
+In the C wing,
+there are 24 rooms, a narrow hallway,
+a kitchen, a solarium and a locked entrance.
+(It’s not rocket science).
+
+┌──(venv3)(voldemort🔥IdeaPad)-[~]
+└─$ python bulletPointAdder.py 
+
+#PASTED
+* In the C wing,
+* there are 24 rooms, a narrow hallway,
+* a kitchen, a solarium and a locked entrance.
+* (It’s not rocket science).
+```
