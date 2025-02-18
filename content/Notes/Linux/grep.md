@@ -4,7 +4,6 @@ aliases:
   - grep
 ---
 
-
 The `grep` command is used to search for text patterns within files or output streams in Linux. It supports regular expressions and various options to refine searches.
 
 
