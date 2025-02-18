@@ -18,6 +18,7 @@ The `grep` command is used to search for text patterns within files or output st
 | -l      | Displays list of a filenames only.                                                              |                                                                                                                  |
 | -w      | Match whole word                                                                                | [[grep#1. Search for a specific word in a file\| 1]]                                                             |
 | -o      | Print only the matched parts of a matching line, with each such part on a separate output line. |                                                                                                                  |
+| -E      | PATTERNS are extended regular expressions                                                       |                                                                                                                  |
 
 # Basic Usage
 
@@ -129,5 +130,54 @@ grep "....or" text/text.txt
 
 
 # Custom Commands
+   
+## 1. Search for email addresses
+   
+```bash
+grep -E "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" text.txt 
+```
+![[images/Pasted image 20250218113658.png]]
 
-The `grep` command is a powerful text-searching tool in Linux, allowing users to find, count, and filter text patterns efficiently. Understanding its various options enhances search capabilities significantly.
+## 2. Find all dates (YYYY-MM-DD format)
+
+```bash
+grep -E "[0-9]{4}-[0-9]{2}-[0-9]{2}" text.txt
+```
+![[images/Pasted image 20250218113834.png]]
+
+## 3. Find IP addresses
+```bash
+grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" text.txt
+```
+![[images/Pasted image 20250218114018.png]]
+
+## 4. Find lines with currency symbols ($, £, €)
+
+```bash
+grep -E "[$£€][0-9]+" text.txt
+```
+![[images/Pasted image 20250218114116.png]]
+
+## 5. Extract phone numbers
+
+```bash
+grep -E "\+?[0-9]{1,3}[- ]?[0-9]{3,4}[- ]?[0-9]{4,}" text.txt
+```
+![[images/Pasted image 20250218114222.png]]
+
+## 6. Find hexadecimal color codes
+  
+```bash
+grep -E "#[A-Fa-f0-9]{6}" text.txt
+```
+![[images/Pasted image 20250218114344.png]]
+
+## 7. Find file paths (both Linux and Windows)
+   
+```bash
+grep -E "(/[^ ]+|\w:\\\\[^ ]+)" text.txt
+```
+![[images/Pasted image 20250218114455.png]]
+
+
+The `grep` command is a powerful text-searching tool in Linux, allowing users to find, count, and filter text patterns efficiently.
