@@ -164,7 +164,6 @@ True
 
 # Character Classes
 
-
 | Shorthand character class | Represents                                                                        |
 | ------------------------- | --------------------------------------------------------------------------------- |
 | \d                        | Any numeric digit from 0 to 9.                                                    |
