@@ -35,6 +35,35 @@ find . -name "example.txt"
 
 This command searches for a file named `example.txt` in the current directory and its sub-directories.
 
+| Command                  | Description                                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| -name pattern            | Searches for files with a specific name or pattern.                                                                   |
+| -type type               | Specifies the type of file to search for (e.g.,  `f`  for regular files,  `d`  for directories).                      |
+| \-size \[+/-\]n          | Searches for files based on size. `+n` finds larger files, `-n` finds smaller files. `n` measures size in characters. |
+| -mtime n                 | Finds files based on modification time.  `n`  represents the number of days ago.                                      |
+| -exec command {} \\;     | Executes a command on each file found.                                                                                |
+| -print                   | Displays the path names of files that match the specified criteria.                                                   |
+| -maxdepth levels         | Restricts the search to a specified directory depth.                                                                  |
+| -mindepth levels         | Specifies the minimum directory depth for the search.                                                                 |
+| -empty                   | Finds empty files and directories.                                                                                    |
+| \-delete                 | Deletes files that match the specified criteria.                                                                      |
+| \-execdir command {} \\; | Executes a command on each file found, from the directory containing the matched file.                                |
+| \-iname pattern          | Case-insensitive version of `-name`. Searches for files with a specific name or pattern, regardless of case.          |
+
+
+> [!NOTE] 
+> **\- exec vs \- execdir**
+> In the Linux `find` command, "-exec" runs the specified command on each matched file in the current directory or wherever the `find` command is run, while "-execdir" specifically runs the command within the directory where each matched file is found, preventing potential race conditions by not changing the working directory during the search.
+> 
+> **Example :**
+> ![[images/Pasted image 20250223202146.png]]
+> 
+> **Explanation :**
+> `find Desktop/ -name "*.txt" -exec ls -la {} \;` command searches for all files with the ".txt" extension in the current directory(i.e `Desktop/`) and its subdirectories, and then runs the `ls -l` command on each file individually, listing its details in the current working(i.e `~`) directory.
+> 
+>`find Desktop/ -name "*.txt" -execdir ls -la {} \;` command does the same search for ".txt" files, but the `ls -l` command will be executed within the directory(i.e `Desktop/`) where each file is found, ensuring that the working directory is always the same as the file location.
+
+
 ---
 
 ## **Searching by Name and Extension**
@@ -159,7 +188,8 @@ The `-exec` option allows executing a command on each found file.
 find /path/to/search -name "*.tmp" -exec rm {} \;
 ```
 
-`{}` is replaced by each found file, and `\;` marks the end of the command.
+>[!Note]
+>`{}` is replaced by each found file, and `\;` marks the end of the command.
 
 **2. Moving Files:**
 
