@@ -34,4 +34,3 @@ We will try to capture requests in burp suite.
 
 ![[images/Pasted image 20250219174229.png]]
 
-
