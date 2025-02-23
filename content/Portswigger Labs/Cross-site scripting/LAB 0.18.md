@@ -17,6 +17,7 @@ This lab contains a reflected cross-site scripting vulnerability in the search q
 
 To solve this lab, perform a cross-site scripting attack that breaks out of the JavaScript string and calls the `alert` function.
 
+# Solution
 ---
 ## Step 1 : Identifying the Vulnerability
 

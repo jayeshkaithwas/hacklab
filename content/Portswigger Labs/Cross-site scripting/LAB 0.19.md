@@ -6,7 +6,7 @@ tags:
   - XSS
   - Labs
   - Reflected
-  - Practitioner
+  - Apprentice
 description: "Lab: Reflected XSS into a JavaScript string with angle brackets HTML encoded"
 ---
 # Lab: Reflected XSS into a JavaScript string with angle brackets HTML encoded
@@ -15,8 +15,8 @@ description: "Lab: Reflected XSS into a JavaScript string with angle brackets HT
 
 This lab contains a reflected cross-site scripting vulnerability in the search query tracking functionality where angle brackets are encoded. The reflection occurs inside a JavaScript string. To solve this lab, perform a cross-site scripting attack that breaks out of the JavaScript string and calls the `alert` function.
 
+# Solution
 ---
-
 ## Understanding the Vulnerability
 
 Reflected XSS happens when user input is included in the response without proper sanitization. In this case, the search query is reflected inside a JavaScript variable as shown:
