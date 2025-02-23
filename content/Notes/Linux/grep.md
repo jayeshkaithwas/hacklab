@@ -2,8 +2,11 @@
 title: grep
 aliases:
   - grep
+tags:
+  - Linux
+  - Bash
+description: The grep command lets you use a pattern to find lines from a file.
 ---
-
 The `grep` command is used to search for text patterns within files or output streams in Linux. It supports regular expressions and various options to refine searches.
 
 
