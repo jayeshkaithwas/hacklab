@@ -4,6 +4,7 @@ aliases:
   - WinMD5
 tags:
   - Malware-Analysis
+  - Windows
 ---
 # Introduction
 

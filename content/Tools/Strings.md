@@ -4,6 +4,7 @@ aliases:
   - Strings
 tags:
   - Malware-Analysis
+  - Windows
 description: Mastering Microsoft Sysinternals Strings Utility.
 ---
 Microsoft's **Sysinternals Strings** utility is a powerful tool for extracting readable text from binary files, commonly used in reverse engineering, debugging, and security analysis. In this intermediate guide, we'll explore advanced usage, practical applications, and tips for maximizing its potential.
