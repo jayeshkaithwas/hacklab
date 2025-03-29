@@ -36,6 +36,11 @@ For example, examining the **Import Table** reveals functions that the executabl
 
 ![[images/Pasted image 20250228125201.png]]
 
+---
+## Export Table
+![[images/Pasted image 20250329124026.png]]
+## Exported function with only an ordinal number
+![[images/Pasted image 20250329124056.png]]
 For a visual demonstration of PEview's capabilities, consider watching the following video:
 
 - https://youtu.be/VCa1yeqCnCs?si=L30Sg6FfKZkFVt0f
