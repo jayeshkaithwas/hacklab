@@ -4,7 +4,7 @@ aliases:
   - Procmon
 description: Procmon, is an advanced monitoring tool for Windows that provides a way to monitor certain registry, file system, network, process, and thread activity.
 ---
-Procmon, is an advanced monitoring tool for Windows that helps track registry, file system, network, process, and thread activities. It enhances the functionality of two legacy tools: FileMon and RegMon. Procmon is widely used in malware analysis and system troubleshooting, providing deep insights into system behavior.
+**Procmon**, is an advanced monitoring tool for Windows that helps track registry, file system, network, process, and thread activities. It enhances the functionality of two legacy tools: FileMon and RegMon. Procmon is widely used in malware analysis and system troubleshooting, providing deep insights into system behavior.
 
 >[!Note]
 > **Procmon** captures a lot of data, it doesn’t capture everything. 
@@ -13,7 +13,7 @@ Procmon, is an advanced monitoring tool for Windows that helps track registry, f
 
 ## **Running Procmon Safely**
 
-Procmon begins capturing system calls immediately upon execution. Given that a Windows machine can generate over 50,000 events per minute, excessive logging can crash a virtual machine by consuming all available RAM. To prevent this:
+**Procmon** begins capturing system calls immediately upon execution. Given that a Windows machine can generate over 50,000 events per minute, excessive logging can crash a virtual machine by consuming all available RAM. To prevent this:
 
 - Run Procmon for limited time periods.
     
