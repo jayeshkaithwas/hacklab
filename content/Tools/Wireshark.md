@@ -40,6 +40,7 @@ During installation, you might be prompted to allow non-root users to capture pa
 ## 1️⃣ Start Capturing Packets
 
 - Open Wireshark.
+    ![[images/Pasted image 20250404143410.png]]
     
 - Select the network interface (e.g., `eth0`, `wlan0`).
     
