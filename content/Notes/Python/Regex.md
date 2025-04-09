@@ -162,7 +162,7 @@ True
 [('415', '555', '1122'), ('212', '555', '0000')]
 ```
 
-# Character Classes
+## **Character Classes**
 
 | Shorthand character class | Represents                                                                        |
 | ------------------------- | --------------------------------------------------------------------------------- |
@@ -172,3 +172,96 @@ True
 | \W                        | Any character that is *not* a letter, numeric digit, or the underscore character. |
 | \s                        | Any space, tab, or newline character.                                             |
 | \S                        | Any character that is *not* a space, tab, or newline.                             |
+
+```python
+>>> a = re.compile(r'\d+\s\w+')
+>>> a.findall('12 drummers, 11 pipers, 10 lords, 9 ladies, 8 maids, 7 swans, 6 geese, 5 rings, 4 birds, 3 hens, 2 doves, 1 partridge')
+['12 drummers', '11 pipers', '10 lords', '9 ladies', '8 maids', '7 swans', '6 geese', '5 rings', '4 birds', '3 hens', '2 doves', '1 partridge']
+```
+
+Expression `\d+\s\w+` will match text that has one or more **numeric digits** **(\d+)**, followed by a **whitespace** character **(\s)**, followed by one or more **letter/digit/underscore** characters **(\w+)**.
+
+```python
+>>> a = re.compile(r'[aeiouAEIOU]')
+>>> a.findall('Life is binary: zeros and ones.')
+['i', 'e', 'i', 'i', 'a', 'e', 'o', 'a', 'o', 'e']
+
+# ^
+>>> a = re.compile(r'[^aeiouAEIOU]')
+>>> a.findall('Life is binary: zeros and ones.')
+['L', 'f', ' ', 's', ' ', 'b', 'n', 'r', 'y', ':', ' ', 'z', 'r', 's', ' ', 'n', 'd', ' ', 'n', 's', '.']
+```
+
+## **Caret (^) and Dollar Sign ($)** 
+
+**Caret symbol (^)** can be used at the start of a regex to indicate that a match must occur at the beginning of the searched text. Likewise, you can put a **dollar sign ($)** at the end of the regex to indicate the string must end with this regex pattern.
+
+```python
+>>> a = re.compile(r'^Hello')
+>>> a.search('Hello world!')
+<_sre.SRE_Match object; span=(0, 5), match='Hello'>
+
+>>> endsWithNumber = re.compile(r'\d$')
+>>> endsWithNumber.search('Your number is 42')
+<_sre.SRE_Match object; span=(16, 17), match='2'>
+
+>>> wholeStringIsNum = re.compile(r'^\d+$')
+>>> wholeStringIsNum.search('1234567890')
+<_sre.SRE_Match object; span=(0, 10), match='1234567890'>
+```
+
+## **Wildcard Character (.)**
+
+The ***. (or dot)*** character in a regular expression is called a **wildcard** and will match any character except for a newline.
+
+```python
+>>> a = re.compile(r'.ing')
+>>> a.findall('She is better at painting than at drawing')
+['painting', 'drawing']
+
+#Dot-Star
+>>> a = re.compile(r'First Name: (.*) Last Name: (.*)')
+>>> b = a.search('First Name: Jayesh Last Name: Kaithwas')
+>>> b.group(1)
+'Jayesh'
+>>> b.group(2)
+'Kaithwas'
+
+# Greedy mode : In greedy mode it will always try to match as much text as possible.
+
+>>> nongreedy = re.compile(r'<.*?>')
+>>> a = nongreedy.search('<To serve man> for dinner.>')
+>>> a.group()
+'<To serve man>'
+
+>>> greedy = re.compile(r'<.*>')
+>>> a = greedy.search('<To serve man> for dinner.>')
+>>> a.group()
+'<To serve man> for dinner.>'
+
+# Newlines with the Dot Character
+>>> noNewlineRegex = re.compile('.*')
+>>> a.search('She is better at painting than at drawing.\nThey practice guitar by playing every night.\nShe learns French by listening to radio broadcasts').group()
+'She is better at painting than at drawing.'
+>>> newlin
+>>> eRegex = re.compile('.*', re.DOTALL)
+>>> a.search('She is better at painting than at drawing.\nThey practice guitar by playing every night.\nShe learns French by listening to radio broadcasts').group()
+'She is better at painting than at drawing.\nThey practice guitar by playing every night.\nShe learns French by listening to radio broadcasts'
+```
+
+## **Summery**
+
+| Symbol                   | Description                                              |
+| ------------------------ | -------------------------------------------------------- |
+| `?`                      | Matches zero or one of the preceding group.              |
+| `*`                      | Matches zero or more of the preceding group.             |
+| `+`                      | Matches one or more of the preceding group.              |
+| `{n}`                    | Matches exactly n of the preceding group.                |
+| `{n,}`                   | Matches n or more of the preceding group.                |
+| `{,m}`                   | Matches 0 or m of the preceding group.                   |
+| `{n,m}`                  | Matches at least n and at most m of the preceding group. |
+| `{n,m}?` or `*?` or `+?` | Performs a nongreedy match of the preceding group.       |
+| `^spam`                  | Matches the string begin with spam.                      |
+| `spam$`                  | Matches the string ends with spam.                       |
+| `.`                      | Matches any character, except newline characters.        |
+
