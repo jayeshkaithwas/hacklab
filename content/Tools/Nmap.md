@@ -229,6 +229,11 @@ Below, you'll find a curated list of essential Nmap commands categorized for var
 	# --min-rate=10000 --> Not to take more than 10000 mili sec on a port.
 	# -oG              --> Greapable output.
 	# scan-allports    --> File name where output should save.
+	
+	nmap -sS -sU -p- {target_IP}
+	# -sS              --> TCP SYN
+	# -sU              --> UDP Scan
+	# -p-              --> All ports
     ```
 
 These Nmap commands empower security professionals to explore network vulnerabilities, assess security configurations, and conduct detailed reconnaissance during penetration testing exercises. Always ensure that scans and tests are conducted ethically and with proper authorization.
