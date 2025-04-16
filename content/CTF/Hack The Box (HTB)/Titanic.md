@@ -6,6 +6,7 @@ tags:
   - Easy
   - Linux
   - HTB
+  - CTF
 ---
 [_Titanic_](https://app.hackthebox.com/machines/Titanic) is an Easy Linux machine on HTB which allows you to practice virtual host enumeration, path traversal, gitea, PBKDF2 cracking and arbitrary code execution.
 
