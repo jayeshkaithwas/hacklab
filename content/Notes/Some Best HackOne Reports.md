@@ -27,3 +27,5 @@ Forward the requests and you should get an email containing the reset link that 
 **Impact**
 
 By just knowing the victim email address used on GitLab, you can takeover his account by changing his password without user interaction since the attacker get the same email as the victim.
+
+
