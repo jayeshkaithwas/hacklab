@@ -56,7 +56,11 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 #include <unistd.h>
 
 int main () {
-	const char* ip = "192.168.0.108"
+	const char* ip = "192.168.0.108";
+	struct sockaddr_in addr;
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(4444);
+	inet_aton(ip, &addr.sin_addr);
 }
 ```
 
@@ -199,3 +203,77 @@ int main() {
     ```
     - `argc` (argument count): Number of command-line arguments.
     - `argv` (argument vector): Array of strings containing the arguments.
+
+
+```C
+const char* ip = "192.168.0.108";
+```
+
+ **`const`**
+- This means the value the pointer points to **can’t be changed**.
+- You’re saying: _“I’m not going to modify this string.”_
+
+ **`char*`**
+- A pointer to a **character (char)** — in this case, the **first character of a string**.
+
+**`"10.9.1.6"`**
+- This is a **string literal** (a sequence of characters).
+- It's stored in **read-only memory** in C.
+
+**`ip`**
+- This is the **variable name**, and it holds the pointer to the first character of the string.
+
+
+```c
+struct sockaddr_in addr;
+```
+You're creating a variable `addr` of type `struct sockaddr_in`.
+
+This structure is used to **store IPv4 socket address information** — like IP address and port — that the socket will connect or bind to.
+
+> **Why `sockaddr_in` and not just `sockaddr`?**
+
+1.  `struct sockaddr_in` — **specific to IPv4**
+- Contains **fields for IP and port** that are easy to work with.
+- Designed to make **setting up IPv4 addresses** easier.
+- Used for:
+    - `connect()`, `bind()`, `accept()`, etc. — but via a cast to `sockaddr`.
+
+```c
+struct sockaddr_in addr;
+addr.sin_family = AF_INET;
+addr.sin_port = htons(4444);
+inet_aton("10.9.1.6", &addr.sin_addr);
+```
+
+You set the IP and port **directly** using its named fields.
+
+2.  `struct sockaddr` = **generic placeholder**
+
+- It’s a more **abstract structure**.
+- Used as a **base type** that works for **any protocol** (IPv4, IPv6, Unix domain, etc.).
+- Looks like this:
+
+```c
+struct sockaddr {
+    unsigned short sa_family;   // Address family (AF_INET, AF_INET6, etc.)
+    char sa_data[14];           // Protocol-specific address data
+};
+```
+
+**Notice:** it doesn’t tell you **how to structure IP addresses or ports** - it just holds raw data.
+
+The actual structure (like `sockaddr_in` for IPv4 or `sockaddr_in6` for IPv6) is **cast to `sockaddr*`** when passed into socket functions.
+
+> **🧠 Analogy**
+
+Think of `sockaddr` as a **base class** or **interface** (like in OOP).  
+And `sockaddr_in`, `sockaddr_in6`, `sockaddr_un` are the **specific implementations**.
+
+You _store the real info_ in `sockaddr_in`, but _pass it around_ as a `sockaddr*`.
+
+| Struct        | Use for | Contains IP & Port? | Used in system calls |
+| ------------- | ------- | ------------------- | -------------------- |
+| `sockaddr_in` | IPv4    | ✅ Yes               | ✅ (via cast)         |
+| `sockaddr`    | Generic | ❌ No (raw only)     | ✅ Required type      |
+
