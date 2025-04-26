@@ -4,9 +4,7 @@ aliases:
   - Home
 description: Welcome to the Jayesh's HackLab.
 ---
-# Welcome to the Jayesh's HackLab
-
-*![[images/home.jpeg]]*
+![[images/home.jpeg]]
 
 >[!quote] **Life is binary: zeros and ones.**
 > 
