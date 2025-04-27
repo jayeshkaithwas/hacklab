@@ -2,6 +2,11 @@
 title: Reverse Shell
 aliases:
   - Reverse Shell
+tags:
+  - Reverse_Shell
+  - Bash
+  - Windows
+  - Linux
 ---
 # 1. Simple netcat Reverse Shell
 ---
