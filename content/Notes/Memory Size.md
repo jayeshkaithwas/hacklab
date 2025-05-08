@@ -44,7 +44,7 @@ To convert a decimal number to binary:
 3. Repeat the process with the quotient until you reach  `0`.
 4. The binary representation is the remainders read in reverse order.
 
-**_Example:_** Convert `13` to binary.
+###### **_Example:_** Convert `13` to binary.
 
 | Division Step | Quotient | Remainder |
 | ------------- | -------- | --------- |
@@ -64,7 +64,7 @@ To convert a binary number to decimal:
 1. Multiply each bit by  `2`  raised to its position (from right, starting at  `0`).
 2. Sum the results.
 
-**_Example:_** Convert  `1101`  to decimal.
+###### **_Example:_** Convert  `1101`  to decimal.
 
 $$
 1×2^3+1×2^2+0×2^1+1×2^0 
@@ -78,14 +78,27 @@ Decimal of 1101: **13**
 ---
 # Decimal to Hexadecimal Conversion
 
+### 💡 Hex Table (0–15):
+
+| Decimal | Hex |
+| ------- | --- |
+| 0       | 0   |
+| 1       | 1   |
+| ...     | ... |
+| 10      | A   |
+| 11      | B   |
+| 12      | C   |
+| 13      | D   |
+| 14      | E   |
+| 15      | F   |
+
 To convert a decimal to hexadecimal:
 
 1. Divide the decimal number by 16
 2. Convert Quotient and Reminder values to hex digits.
 3. Put them together.
 
-***Example:*** Convert 65 to Hexadecimal.
-
+###### ***Example 1:*** Convert 65 to Hexadecimal.
 **Step 1:** 
 
 - 65 ÷ 16 = 4 remainder **1**
@@ -103,20 +116,23 @@ This gives:
 
 - So, **65 in decimal = 0x41 in hex**
 
-### 💡 Hex Table (0–15):
+###### ***Example 2:*** Convert 172 to Hexadecimal.
+**Step 1:** 
 
-|Decimal|Hex|
-|---|---|
-|0|0|
-|1|1|
-|...|...|
-|10|A|
-|11|B|
-|12|C|
-|13|D|
-|14|E|
-|15|F|
+- 172 ÷ 16 = 10 remainder **12**
 
+This gives:
+- Quotient = 10
+- Remainder = 12
+
+**Step 2:**
+
+- Quotient: `10` → hex digit is `A`
+- Remainder: `12` → hex digit is `C`
+
+**Step 3:**
+
+- So, **172 in decimal = 0xAC in hex**
 ---
 # Converting Unsigned Integer to Signed Integer
 
@@ -193,3 +209,64 @@ Now add the weights for the 1s:
 - `4` and `1` from the last two bits
 
 −128+4+1=−123-128 + 4 + 1 = -123
+
+---
+# 7-bit integer encoding
+
+It is also known as **Base-127 Varint encoding**
+
+| Chunk Position   | Continuation Bit (MSB) |
+| ---------------- | ---------------------- |
+| First (LSB side) | `1` if more follow     |
+| Last (MSB side)  | Always `0`             |
+
+| Value Range   | Bytes Used | MSB of Each Byte                           |
+| ------------- | ---------- | ------------------------------------------ |
+| `0 – 127`     | 1 byte     | `0xxxxxxx` (MSB = 0)                       |
+| `128 – 16383` | 2 bytes    | First: `1xxxxxxx`, Second: `0xxxxxxx`      |
+| `>16383`      | 3+ bytes   | All but last: `1xxxxxxx`, Last: `0xxxxxxx` |
+1. Convert 300 to binary.
+2. Break into 7-bit chunks.
+3. Add continuation bits
+
+###### ***Example:*** Encoding integer 300
+
+**Step 1:** Convert 300 to binary.
+
+- `00000001` `00101100`        →        16-bit 
+- =`0b100101100`
+
+**Step 2:** Break into 7-bit chunks.
+
+- `00` `0000010` `0101100`
+- $1^{st}$ chunk = `0101100`
+- $2^{nd}$ chunk = `0000010`
+
+**Step 3:** Add continuation bits
+Converting chunks to **8-bit** and then adding `1` to MSB, to the chunk who follows more bytes and `0` to MSB, to the chunk who follows **least bytes**.
+
+$1^{st}$ chunk = ` 0101100`
+		= `00101100`
+$2^{nd}$ chunk = ` 0000010`
+		 = `00000010`
+
+Adding `1` to $1^{st}$ chunks MSB and `0` to $2^{nd}$ chunks MSB.
+
+$1^{st}$ chunk = `00101100` + `1`
+		= `10101100`
+		= `0xAC`                     →        Hexadecimal
+$2^{nd}$ chunk = `00000010` + `0`
+		 = `00000010`
+		 = `0x02`                    →        Hexadecimal
+
+**Result:**
+Encoded as bytes:
+```csharp
+[0xAC, 0x02]
+```
+
+Or in binary:
+```csharp
+10101100 00000010
+```
+
