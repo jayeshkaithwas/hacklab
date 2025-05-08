@@ -92,13 +92,13 @@ Decimal of 1101: **13**
 | 14      | E   |
 | 15      | F   |
 
-To convert a decimal to hexadecimal:
+**To convert a decimal to hexadecimal:**
 
-1. Divide the decimal number by 16
-2. Convert Quotient and Reminder values to hex digits.
+1. Divide the decimal number by 16 till Quotient < 16.
+2. Convert Quotient and Reminders values to hex digits.
 3. Put them together.
 
-###### ***Example 1:*** Convert 65 to Hexadecimal.
+###### ***Example:*** Convert 65 to Hexadecimal.
 **Step 1:** 
 
 - 65 ÷ 16 = 4 remainder **1**
@@ -116,23 +116,65 @@ This gives:
 
 - So, **65 in decimal = 0x41 in hex**
 
-###### ***Example 2:*** Convert 172 to Hexadecimal.
-**Step 1:** 
+**Exercise:**
+1. Convert **10** to hexadecimal.     →     [[Answers#1. Convert **10** to hexadecimal.|Answer]]
+2. Convert **15** to hexadecimal.     →     [[Answers#2. Convert **15** to hexadecimal.|Answer]]
+3. Convert **31** to hexadecimal.     →     [[Answers#3. Convert **31** to hexadecimal.|Answer]]
+   
+4. Convert **64** to hexadecimal.     →     [[Answers#4. Convert **64** to hexadecimal.|Answer]]
+5. Convert **127** to hexadecimal.     →     [[Answers#5. Convert **127** to hexadecimal.|Answer]]
+6. Convert **255** to hexadecimal.     →     [[Answers#6. Convert **255** to hexadecimal.|Answer]]
+   
+7. Convert **1023** to hexadecimal.     →     [[Answers#7. Convert **1023** to hexadecimal.|Answer]]    
+8. Convert **4096** to hexadecimal.     →     [[Answers#8. Convert **4096** to hexadecimal.|Answer]]
+9. Convert **12345** to hexadecimal.     →     [[Answers#9. Convert **12345** to hexadecimal.|Answer]]
+10. Convert **65535** to hexadecimal.     →     [[Answers#10. Convert **65535** to hexadecimal.|Answer]]
 
-- 172 ÷ 16 = 10 remainder **12**
+---
+# Hexadecimal to Decimal Conversion
 
-This gives:
-- Quotient = 10
-- Remainder = 12
+To convert a **hexadecimal number to decimal**, follow this simple method:
 
-**Step 2:**
+1. Write the hexadecimal number.
+2. Replace each hex digit with its decimal equivalent.
+3. Multiply each by 16 raised to its positional power.
+4. Add all the products together.
 
-- Quotient: `10` → hex digit is `A`
-- Remainder: `12` → hex digit is `C`
+Take each digit, multiply it by **16 raised to the power of its position** (counting from right to left, starting at 0), and sum the results.
 
-**Step 3:**
+**Example:** Convert `2F` to decimal
 
-- So, **172 in decimal = 0xAC in hex**
+```
+= (2 × 16¹) + (F × 16⁰)
+= (2 × 16) + (15 × 1)
+= 32 + 15
+= 47
+```
+
+**Example:** Convert `3A7` to decimal
+
+```
+= (3 × 16²) + (A × 16¹) + (7 × 16⁰)
+= (3 × 256) + (10 × 16) + (7 × 1)
+= 768 + 160 + 7
+= 935
+```
+
+**Exercise:**
+
+1. Convert hexadecimal **A** to decimal.
+2. Convert hexadecimal **1F** to decimal.
+3. Convert hexadecimal **3C** to decimal.
+
+4. Convert hexadecimal **7E** to decimal.
+5. Convert hexadecimal **FF** to decimal.
+6. Convert hexadecimal **100** to decimal.
+
+7. Convert hexadecimal **1A3** to decimal.
+8. Convert hexadecimal **2F7** to decimal.
+9. Convert hexadecimal **3E8** to decimal.
+10. Convert hexadecimal **FFFF** to decimal.
+
 ---
 # Converting Unsigned Integer to Signed Integer
 
@@ -140,6 +182,9 @@ Not all integer values are positive. In some scenarios, negative integers are re
 **So to represent signed integer in native integer value which can interpret ate by CPU, there is a concept called two's complement.** Which helps in conversion between unsigned and signed values.
 
 ![[images/Pasted image 20250507160212.png]]
+**MSB** → Most Significant Bit
+**LSB**  → Least Significant Bit 
+
 - Simple sign detection: **MSB (Most Significant Bit)** is the **sign bit**:
 	- `0` = positive
 	- `1` = negative
