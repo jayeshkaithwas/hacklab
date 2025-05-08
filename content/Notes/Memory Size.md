@@ -34,7 +34,35 @@ aliases:
 | Yottabyte (YB) | 1024 ZB               |
 
 ---
+# Addition of Bits
 
+**Example:**
+You're adding:
+
+```
+  00110111   (which is 55 in decimal)
++ 00000001   (which is 1 in decimal)
+------------
+= 00111000   (which is 56 in decimal)
+```
+
+Let's Add Bit by Bit (Right to Left):
+
+```
+Bit position:  7 6 5 4 3 2 1 0
+               0 0 1 1 0 1 1 1   ← 00110111
+           +   0 0 0 0 0 0 0 1   ← 00000001
+           -------------------
+               0 0 1 1 1 0 0 0   ← 00111000
+```
+
+Explanation of the rightmost bits:
+- `1 + 1` = `10` → you write down **0**, carry over **1**
+- `1 + 0 + carry 1` = `10` → write down **0**, carry **1**
+- `1 + 0 + carry 1` = `10` → write down **0**, carry **1**
+- `0 + 0 + carry 1` = `1` → write **1**, carry **0**
+- Remaining bits add up normally.
+---
 # **Decimal to Binary Conversion**
 
 To convert a decimal number to binary:
@@ -236,7 +264,7 @@ Negative Number (e.g., -123):
 1. Start with +123: `01111011`
 2. Flip the bits: `10000100`
 3. Add 1:  
-    `10000100` + `00000001` = `10000101`
+    `10000100` + `00000001` = `10000101`              refer to [[Memory Size#]]
 
 - So, **-123 = `10000101`** in 8-bit two's complement.
 
