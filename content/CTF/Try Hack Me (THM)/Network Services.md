@@ -5,9 +5,10 @@ aliases:
 tags:
   - Easy
   - CTF
+description: Enumerating and exploiting a variety of network services and configurations.
 ---
 
-Walkthrough of the three-part [[content/CTF/Try Hack Me (THM)/index|Try Hack Me (THM)]] [Network Services lab](https://tryhackme.com/room/networkservices2) where I will enumerate and exploit a variety of network services and configurations.
+Walkthrough of [[content/CTF/Try Hack Me (THM)/index|Try Hack Me's (THM)]] [Network Services lab](https://tryhackme.com/room/networkservices2) where I will enumerate and exploit a variety of network services and configurations.
 
 # SMB
 ## Understanding SMB

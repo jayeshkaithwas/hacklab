@@ -2,6 +2,10 @@
 title: Tip & Tricks
 aliases:
   - Tip & Tricks
+tags:
+  - Linux
+  - Bash
+description: Linux Bash Shortcuts, tricks, commands and more.
 ---
 # Terminal Shortcut Keys
 ---
@@ -47,3 +51,59 @@ syscall::connect:entry
 }
 
 ```
+
+# Join Command
+```shell
+voldemort@IdeaPad:~$ cat name.txt 
+1 John
+2 Mike
+3 Anne
+4 Tom
+5 Harry
+voldemort@IdeaPad:~$ cat salary.txt 
+1 $5,000
+2 $500
+3 $1,500
+4 $4,500
+5 $2,000
+voldemort@IdeaPad:~$ join name.txt salary.txt 
+1 John $5,000
+2 Mike $500
+3 Anne $1,500
+4 Tom $4,500
+5 Harry $2,000
+```
+
+# tr
+## Convert a file to all upper-case
+```sh
+voldemort@IdeaPad:~$ cat name.txt 
+1 John
+2 Mike
+3 Anne
+4 Tom
+5 Harry
+voldemort@IdeaPad:~$ tr a-z A-Z < name.txt 
+1 JOHN
+2 MIKE
+3 ANNE
+4 TOM
+5 HARRY
+```
+
+## Convert a file to all lower-case
+```
+voldemort@IdeaPad:~$ cat name.txt 
+1 John
+2 Mike
+3 Anne
+4 Tom
+5 Harry
+voldemort@IdeaPad:~$ tr A-Z a-z < name.txt 
+1 john
+2 mike
+3 anne
+4 tom
+5 harry
+```
+

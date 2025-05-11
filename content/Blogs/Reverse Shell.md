@@ -7,6 +7,7 @@ tags:
   - Bash
   - Windows
   - Linux
+description: Different types of Reverse Shell's method.
 ---
 # 1. Simple netcat Reverse Shell
 ---

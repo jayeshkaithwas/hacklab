@@ -5,6 +5,7 @@ aliases:
 tags:
   - Easy
   - CTF
+description: "Getting Start with Hydra: Brute-Forcing Tool"
 ---
 ## **Task 1: Introduction to Hydra**
 

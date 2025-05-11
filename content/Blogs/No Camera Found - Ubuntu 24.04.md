@@ -7,6 +7,7 @@ tags:
   - Camera
   - Linux
   - Solving-Issue
+description: Ubuntu No Camera Found Error Solution.
 ---
 
 # No Camera Found? Here's How to Fix the Camera App in Ubuntu 24.04

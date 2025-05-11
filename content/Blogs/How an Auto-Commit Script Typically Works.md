@@ -5,6 +5,7 @@ aliases:
 tags:
   - Python
   - Bash
+description: "How an Auto-Commit Script Typically Works: Manipulating Git History for Fake Commits"
 ---
 
 ![[images/Pasted image 20250120145738.png]]

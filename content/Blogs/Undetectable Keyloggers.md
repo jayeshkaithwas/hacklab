@@ -3,6 +3,8 @@ title: Undetectable Keyloggers
 aliases:
   - Undetectable Keyloggers
 description: "Undetectable Keyloggers: Understanding a Hidden Threat"
+tags:
+  - Malware
 ---
 In today’s connected world, keyloggers remain one of the most subtle yet dangerous types of malware. Their purpose is simple yet devastating: capture every keystroke a user types - be it login credentials, private messages, or banking details and transmit it to malicious actors.
 
@@ -15,11 +17,8 @@ This article dives into the core concepts from a research paper that tested the 
 A keylogger is a type of spyware designed to record user keystrokes without their knowledge. Advanced variants can:
 
 - Capture **screenshots** of the user’s screen
-    
 - Log all typed text
-    
 - Send collected data via **email or FTP**
-    
 - Hide within seemingly harmless files (like images or documents)
 
 
@@ -141,7 +140,8 @@ This stage uses **social engineering**: the keylogger is hidden within another f
 
 ## 🧪 Final Step: Antivirus Testing
 
-The enhanced keylogger was tested against **20+ popular antivirus tools** (as per AV-Comparatives 2014). Each stage (basic keylogger, encoded version, and embedded version) was analyzed.
+- The enhanced keylogger was tested against **20+ popular antivirus tools**.
+- Each stage (basic keylogger, encoded version, and embedded version) was analyzed.
 
 ---
 

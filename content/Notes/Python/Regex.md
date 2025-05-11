@@ -3,6 +3,8 @@ title: Regex
 aliases:
   - Regex
 tags:
+  - Python
+description:
 ---
 ## **Regex Objects**
 

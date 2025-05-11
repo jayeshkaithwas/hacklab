@@ -4,6 +4,7 @@ aliases:
   - Python Basic
 tags:
   - Python
+description: Getting Start with Python.
 ---
 # Operators
 ---

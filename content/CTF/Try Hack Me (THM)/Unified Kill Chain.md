@@ -6,6 +6,7 @@ tags:
   - Easy
   - THM
   - Walkthrough
+description: Walkthrough to Kill Chain framework
 ---
 # What is a "Kill Chain"
 ---

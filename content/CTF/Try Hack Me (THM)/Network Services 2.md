@@ -5,6 +5,7 @@ aliases:
 tags:
   - Easy
   - CTF
+description: Enumerating and exploiting a variety of network services and configurations - PART 2.
 ---
 
 
