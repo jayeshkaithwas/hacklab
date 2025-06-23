@@ -52,7 +52,7 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 
 # 5. Reverse Shell in C for Linux 
 ---
-## Code
+### Code
 ```C
 #include <stdio.h>
 #include <sys/socket.h>
@@ -89,8 +89,11 @@ int main () {
 }
 ```
 
-### Explanation
+#### Explanation
 ---
+1. Firstly, we include the headers, [[Headers, DLLs and Functions#`stdio.h`|<stdio.h>]] , [[Headers, DLLs and Functions#`sys/socket.h`|<sys/socket.h>]], [[Headers, DLLs and Functions#`netinet/ip.h`|<netinet/ip.h>]], [[Headers, DLLs and Functions#`arpa/inet.h`|<arpa/inet.h>]], [[Headers, DLLs and Functions#`unistd.h`|<unistd.h>]].
+2. 
+
 ```C
 #include <stdio.h>
 ```
