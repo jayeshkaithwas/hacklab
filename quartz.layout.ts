@@ -20,13 +20,13 @@ export const sharedPageComponents: SharedLayout = {
     provider: 'giscus',
     options: {
       // from data-repo
-      repo: 'morrowind-modding/morrowind-modding.github.io',
+      repo: 'jayeshkaithwas/hacklab',
       // from data-repo-id
-      repoId: 'R_kgDOLP1-Jw',
+      repoId: 'R_kgDONivvmQ',
       // from data-category
       category: 'Announcements',
       // from data-category-id
-      categoryId: 'DIC_kwDOLP1-J84CdRF8',
+      categoryId: 'DIC_kwDONivvmc4CsGvQ',
       reactionsEnabled: true,
     }
   }),
