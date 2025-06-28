@@ -53,6 +53,7 @@ syscall::connect:entry
 ```
 
 # Join Command
+---
 ```shell
 voldemort@IdeaPad:~$ cat name.txt 
 1 John
@@ -75,6 +76,7 @@ voldemort@IdeaPad:~$ join name.txt salary.txt
 ```
 
 # tr
+---
 ## Convert a file to all upper-case
 ```sh
 voldemort@IdeaPad:~$ cat name.txt 
