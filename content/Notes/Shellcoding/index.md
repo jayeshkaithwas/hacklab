@@ -1,0 +1,5 @@
+---
+title: Shellcoding
+aliases:
+  - Shellcoding
+---
