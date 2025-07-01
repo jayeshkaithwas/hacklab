@@ -3,15 +3,7 @@ title: Basic Terms
 aliases:
   - Basic Terms
 ---
-# Shellcode
----
-**Shellcoding** is an excellent way to learn more about **assembly language** and how a program **communicates with the underlying OS**.
-
-> **Why are we red teamers and penetration testers writing shellcode?**
-
-Because in real cases shellcode can be a code that is injected into a running program to make it do something it was not made to do, for example buffer overflow attacks. So shellcode is generally can be used as the “payload” of an exploit.
-
-## Basic Terms
+# Basic Terms
 ---
 ### Stack
 The stack is a data structure, more specifically a ***Last In First Out*** **(LIFO)** data structure, which means that the most recent data placed, or pushed, onto the stack is the next item to be removed, or popped, from the stack. 
@@ -72,7 +64,7 @@ It divides memory into small, fixed-size **pages** and maps them between:
 3. **Efficiency** – Lets OS use memory more flexibly (no need for big contiguous blocks)
 4. **Virtual memory** – Can use disk space as extra memory (swap)
 
-##  Key Concepts
+### Key Concepts
 
 |Concept|Description|
 |---|---|
@@ -87,3 +79,18 @@ When a program accesses memory:
 3. The CPU reads/writes the actual RAM
 
 If the page isn’t in memory → **Page Fault** → OS loads it from disk into RAM.
+
+## Cache Memory
+
+Cache memory is a small, fast memory inside the CPU used to temporarily store frequently accessed data from RAM. When the CPU accesses a memory location, it stores a copy in the cache for faster future access.
+
+- **Cache hit**: Data is found in cache → fast access.
+- **Cache miss**: Data must be fetched from RAM → slower.
+
+![[images/Pasted image 20250701115614.png]]
+Modern CPUs have:
+- **L1 cache** per core (smallest and fastest)
+- **Shared L2 cache**
+- Often a **larger shared L3 cache**
+
+All memory accesses go through these cache levels. Multiple copies of the same data can exist (in registers, L1, L2, and RAM), but the CPU manages consistency. Efficient cache use significantly boosts performance.
