@@ -33,6 +33,32 @@ aliases:
 | Zettabyte (ZB) | 1024 EB               |
 | Yottabyte (YB) | 1024 ZB               |
 
+# Memory size used in `x86-64` architecture
+
+| Storage (Unit)   | Size(bits) | Size(bytes) |
+| ---------------- | ---------- | ----------- |
+| Byte             | 8-bits     | 1 byte      |
+| Word             | 16-bits    | 2 bytes     |
+| Double-word      | 32-bits    | 4 bytes     |
+| Quardword        | 64-bits    | 8 bytes     |
+| Double quardword | 128-bits   | 16 bytes    |
+# Memory size in C/C++
+| **C/C++ Declaration** | **Storage (Unit)** | **Size (bits)** | **Size (bytes)** |
+| --------------------- | ------------------ | --------------- | ---------------- |
+| `char`                | Byte               | 8 bits          | 1 byte           |
+| `short`               | Word               | 16 bits         | 2 bytes          |
+| `int`                 | Double-word        | 32 bits         | 4 bytes          |
+| `unsigned int`        | Double-word        | 32 bits         | 4 bytes          |
+| `long`[^1]            | Quadword           | 64 bits         | 8 bytes          |
+| `long long`           | Quadword           | 64 bits         | 8 bytes          |
+| `int *`[^2]           | Quadword           | 64 bits         | 8 bytes          |
+| `char *`              | Quadword           | 64 bits         | 8 bytes          |
+| `float`               | Double-word        | 32 bits         | 4 bytes          |
+| `double`              | Quadword           | 64 bits         | 8 bytes          |
+[^1]: The `long` type declaration is compiler dependent. Type shown is for gcc and g++ compilers.
+
+[^2]: int * means the address of an integer.
+
 ---
 # Addition of Bits
 
@@ -342,4 +368,5 @@ Or in binary:
 ```csharp
 10101100 00000010
 ```
+
 
