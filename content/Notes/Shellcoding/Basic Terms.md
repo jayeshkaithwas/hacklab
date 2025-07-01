@@ -58,3 +58,32 @@ High Address
 ---------------
 Low Address
 ```
+
+## Paging
+**Paging** is a memory management scheme that allows the operating system to provide **virtual memory**. Making each process think it has a large, continuous block of memory, even though physical memory (RAM) is fragmented and limited.
+
+It divides memory into small, fixed-size **pages** and maps them between:
+
+- **Virtual addresses** (what programs see)
+- **Physical addresses** (actual RAM locations)
+
+1. **Isolation** – Each process gets its own virtual address space
+2. **Security** – Processes can’t access each other's memory
+3. **Efficiency** – Lets OS use memory more flexibly (no need for big contiguous blocks)
+4. **Virtual memory** – Can use disk space as extra memory (swap)
+
+##  Key Concepts
+
+|Concept|Description|
+|---|---|
+|**Page**|A fixed-size block of memory (usually 4 KB) in **virtual memory**|
+|**Frame**|A fixed-size block of memory (also 4 KB) in **physical RAM**|
+|**Page Table**|A data structure that maps **pages** to **frames**|
+|**Virtual Address**|The address used by a program (logical view)|
+|**Physical Address**|The actual location in RAM (real hardware)|
+When a program accesses memory:
+1. It uses a **virtual address** (e.g., `0x7ffdeadbeef`)
+2. The **MMU** (Memory Management Unit) uses the **page table** to map it to a **physical address**
+3. The CPU reads/writes the actual RAM
+
+If the page isn’t in memory → **Page Fault** → OS loads it from disk into RAM.

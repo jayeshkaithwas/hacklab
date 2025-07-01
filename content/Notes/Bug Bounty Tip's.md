@@ -18,4 +18,4 @@ Use Wappalyzer to see technologies used by WebApp
 ## WAFBYPASS
 
 Bypass with `Contant-Encoding: WAFBYPASS` in request.
-![[Pasted image 20250630122936.png]]
+![[images/Pasted image 20250630122936.png]]
