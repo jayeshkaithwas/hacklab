@@ -40,113 +40,99 @@ This can be confusing until you clear **Two's Complement topic**.
 - **Two Steps:**
 	1. Flip the bits.
 	2. Add 1.
-To do this steps first you should know, how bits are added.
-
+To do this steps first you should know, how bits are added. See next topic.
+And if you are already aware of addition then jump to the [[Data Representation#Unsigned Integer to Signed Integer|Converting Unsigned Integer to Signed Integer]].
 # Addition of Bits
 ---
 It is not that simple to add bits like normal adding numbers or xor'ing bits. But also it's not that too hard.
 
 To understand this easily learn this simple rule.
+
 >[!Warning] Rule
-> While Adding bits keep in mind that $1+1\ne2$.
-> $1+1=10$ 
-> $2$ in binary is $10$
+> $1+1=10$ **as $2$ in bits is $10$**
+> $1+1+1=11$  **as $3$ in binary is $11$**
 
-Then else is same as normal addition.
+Then else is same as **normal addition**.
 
-**Example:**
+>**Example:** 4-bits
 
-10 + 20
-# Converting Unsigned Integer to Signed Integer
+**10 + 7**
+
+|     |     |     |  1  |     |     |
+| :-: | --- | :-: | :-: | :-: | :-: |
+|     | 10  |  1  |  0  |  1  |  0  |
+|  +  | 3   |  0  |  0  |  1  |  1  |
+|  =  | 13  |  1  |  1  |  0  |  1  |
+> **Example:** 8-bits
+
+**55 + 38**
+
+|     |          |         |  **1**  |         |         |  **1**  |  **1**  |         |         |
+| :-: | -------- | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
+|     | **55**   |    0    |    0    |    1    |    1    |    0    |    1    |    1    |    1    |
+|  +  | **38**   |    0    |    0    |    1    |    0    |    0    |    1    |    1    |    0    |
+|  =  | ***93*** | ***0*** | ***1*** | ***0*** | ***1*** | ***1*** | ***1*** | ***0*** | ***1*** |
+# Conversion and Interpretation.
+## Unsigned Integer to Signed Integer
 
 Not all integer values are positive. In some scenarios, negative integers are required. For Example, to represent the difference between two integers, you need to take into account that the difference could be negative, and only signed integers can hold negative values.
-**So to represent signed integer in native integer value which can interpret ate by CPU, there is a concept called two's complement.** Which helps in conversion behtween unsigned and signed values.
-
-![[images/Pasted image 20250507160212.png]]
-**MSB** → Most Significant Bit
-**LSB**  → Least Significant Bit 
-
-- Simple sign detection: **MSB (Most Significant Bit)** is the **sign bit**:
-	- `0` = positive
-	- `1` = negative
-
-## **4-bit Example:**
+**So to represent signed integer in native integer value which can interpret ate by CPU, there is a concept called two's complement.** Which helps in conversion between unsigned and signed values.
+### 4-bit Example:
 
 Positive Number (e.g., +5):
 - Binary: `0101`
 
 Negative Number (e.g., -5):
 1. Start with +5: `0101`
-2. Flip the bits: `1010`
+2. Flip the bits(1 become 0 and 0 become 1): `1010`
 3. Add 1:  
     `1010` + `0001` = `1011`
 
 - So, **-5 = `1011`** in 4-bit two's complement.
+ This $2^{nd}$ and $3^{rd}$ step in known as **Two's Complement**.
 
-|Binary|Decimal|
-|---|---|
-|0000|0|
-|0001|1|
-|0010|2|
-|0011|3|
-|0100|4|
-|0101|5|
-|0110|6|
-|0111|7|
-|1000|-8|
-|1001|-7|
-|1010|-6|
-|1011|-5|
-|1100|-4|
-|1101|-3|
-|1110|-2|
-|1111|-1|
-
-- For **n bits**, two's complement can represent integers in the range:
-    $-2^{n-1} \text{ to } 2^{n-1} - 1$
-    - For 8 bits: **-128 to +127**
-    - For 4 bits: **-8 to +7**
-
-
-## **8-bit Example:**
+| Binary | Decimal |
+| ------ | ------- |
+| 0000   | 0       |
+| 0001   | 1       |
+| 0010   | 2       |
+| 0011   | 3       |
+| 0100   | 4       |
+| 0101   | 5       |
+| 0110   | 6       |
+| 0111   | 7       |
+| 1000   | -8      |
+| 1001   | -7      |
+| 1010   | -6      |
+| 1011   | -5      |
+| 1100   | -4      |
+| 1101   | -3      |
+| 1110   | -2      |
+| 1111   | -1      |
+### 8-bit Example:
 
 Positive Number (e.g., +123):
 - Binary: `01111011`
 
 Negative Number (e.g., -123):
-1. Start with +123: `01111011`
-2. Flip the bits: `10000100`
-3. Add 1:  
-    `10000100` + `00000001` = `10000101`              refer to [[Memory Size#]]
+1. Flip the bits: `10000100`
+2. Add 1:  
+    `10000100` + `00000001` = `10000101`
 
 - So, **-123 = `10000101`** in 8-bit two's complement.
 
->Let’s decode `10000101` as **signed two’s complement**:
+## Interpretation of bits.
 
-Break down the bits:  
-`1 0 0 0 0 1 0 1`
+So there are bits(11111000) which represent to signed integer. And you want to know what it is. To know that we can use **Two's Complement**.
 
-Bit weights (signed):
-- MSB = $-128$
-- The rest: $64,32,16,8,4,2,1$
+**Example:** `11111000`
 
-Now add the weights for the 1s:
-- `-128` (from the MSB)
-- `4` and `1` from the last two bits
+1. Flip the bits: `00000111`
+2. Add 1:  
+	`00000111` + `00000001` = `00001000`
+- `00001000` = **8** 
+- So, **`11111000`** = $-8$
+# Floating-point Representation
+The representation issues for floating-point numbers are more complex. There are a series of floating-point representations for various ranges of the value. For simplicity, we will look primarily at the **IEEE 754 32-bit** floating-point standard.
 
-−128+4+1=−123-128 + 4 + 1 = -123
-
-See [[Memory Size#Converting Unsigned Integer to Signed Integer|Converting Unsigned Integer to Signed Integer]] for more understanding.
-Because ***Signed value*** is first converted into binary as it is ***unsigned value*** and then that binary is converted to **signed** with the help of two's Complement. 
-
-Example:
-Representing $-9$ .
-
-| 9(8+1)=                | 00001001     |
-| ---------------------- | ------------ |
-| **Step 1 (Flip Bits)** | **11110110** |
-| **Step 2 (Adding 1)**  | **11110111** |
-| **So, $-9 =$**         | **11110111** |
-| **In Hex**             | **F7**       |
-
-
+## IEEE 32-bit Representation
