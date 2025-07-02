@@ -136,3 +136,201 @@ So there are bits(11111000) which represent to signed integer. And you want to k
 The representation issues for floating-point numbers are more complex. There are a series of floating-point representations for various ranges of the value. For simplicity, we will look primarily at the **IEEE 754 32-bit** floating-point standard.
 
 ## IEEE 32-bit Representation
+![[images/Pasted image 20250702105219.png]]
+A 32-bit floating-point number is divided into **three parts**:
+
+| **Sign (1 bit)** | **Exponent (8 bits)** | **Mantissa / Fraction (23 bits)** |
+| ---------------- | --------------------- | --------------------------------- |
+1. **Sign Bit (S)**
+- **1 bit**: Determines the **sign** of the number.
+    - `0` = **positive**
+    - `1` = **negative**     
+
+2. **Exponent (E)**
+- **8 bits**: Stores the **exponent** in **"biased" form**. 
+- Bias for single precision = **127**
+    - Actual exponent = `Exponent bits (as int)` − 127
+
+3. **Mantissa (M) / Fraction**
+- **23 bits**: Represents the **fractional part** (also called the **significand**).
+- The value is stored **without the leading 1** (because it's implicit in normalized numbers).
+
+#### Example 1 : Represent 5.75
+1. **Convert 5.75 to binary**:   
+    `5.75 = 101.11` = $1.0111× 2^2$                    Refer: [[Memory Size#Decimal to Binary|Decimal to Binary Conversion]]
+2. **Sign bit (S)** = `0` (positive)
+3. **Exponent (E)** = $127+2=129 → 10000001$
+4. **Mantissa (M)** = binary after the dot in `1.0111` → `01110000000000000000000`
+
+So the 32-bit binary is:
+```
+0 10000001 01110000000000000000000
+```
+
+**In hex: `0x40B80000`**
+
+#### Example 2 : Represent 7.77
+1. **Convert 7.77 to binary**:          Refer: [[Memory Size#Decimal to Binary|Decimal to Binary Conversion]], [[Memory Size#Example Convert 7.77|Example: Convert 7.77]]
+	**Integer part = 7 →** `111`  
+	**Fractional part = 0.77 → binary:**
+	```
+	0.77 × 2 = 1.54 → 1
+	0.54 × 2 = 1.08 → 1
+	0.08 × 2 = 0.16 → 0
+	0.16 × 2 = 0.32 → 0
+	0.32 × 2 = 0.64 → 0
+	0.64 × 2 = 1.28 → 1
+	0.28 × 2 = 0.56 → 0
+	0.56 × 2 = 1.12 → 1
+	0.12 × 2 = 0.24 → 0
+	0.24 × 2 = 0.48 → 0
+	0.48 × 2 = 0.96 → 0
+	0.96 × 2 = 1.92 → 1
+	0.92 × 2 = 1.84 → 1
+	0.84 × 2 = 1.68 → 1
+	0.68 × 2 = 1.36 → 1
+	...
+	```
+	
+	So the **binary** of `7.77` is approximately:
+	$111.110001010001110000101000111... (repeating)$
+	
+	Now normalize:
+	$111.11000101000111000010100 = 1.11110001010001110000101 × 2^2$
+
+2. **Sign bit (S)** = `0` (positive)
+3. **Exponent (E)** = $127+2=129 → 10000001$
+4. **Mantissa (M)** = binary after the dot in `1.11110001010001110000101` → `11110001010001110000101`
+
+So the 32-bit binary is:
+```
+0 10000001 11110001010001110000101
+```
+
+**In Hex**: `0x40F8A385
+
+#### Example 3 : Represent -7.75
+1. **Convert -7.75 to binary**:   
+    `7.75 = 111.11` = $1.1111× 2^2$                    Refer: [[Memory Size#Decimal to Binary|Decimal to Binary Conversion]]
+2. **Sign bit (S)** = `1` (negative)
+3. **Exponent (E)** = $127+2=129 → 10000001$
+4. **Mantissa (M)** = binary after the dot in `1.1111` → `11110000000000000000000`
+
+So the 32-bit binary is:
+```
+1 10000001 11110000000000000000000
+```
+
+**In hex: `0xC0F80000`**
+#### Example 4 : Represent -0.125
+1. **Convert -0.125 to binary**:   
+    `-0.125 = 0.001` = $1.0× 2^{-3}$                    Refer: [[Memory Size#Decimal to Binary|Decimal to Binary Conversion]]
+2. **Sign bit (S)** = `1` (negative)
+3. **Exponent (E)** = $127+(-3)=124 → 01111100$
+4. **Mantissa (M)** = binary after the dot in `1.0` → `00000000000000000000000`
+
+So the 32-bit binary is:
+```
+1 01111100 00000000000000000000000
+```
+
+**In hex: `0xBE000000`**
+
+#### Example 5 : Represent 5.75
+1. **Convert 5.75 to binary**:   
+    `5.75 = 101.11` = $1.0111× 2^2$                    Refer: [[Memory Size#Decimal to Binary|Decimal to Binary Conversion]]
+2. **Sign bit (S)** = `0` (positive)
+3. **Exponent (E)** = $127+2=129 → 10000001$
+4. **Mantissa (M)** = binary after the dot in `1.0111` → `01110000000000000000000`
+
+So the 32-bit binary is:
+```
+0 10000001 01110000000000000000000
+```
+
+**In hex: `0x40B80000
+
+#### Example 6 : Identification `0x41440000`
+1. **Convert `0x41440000` to binary:**              Refer: [[Memory Size#Hexadecimal to Integer|Hexadecimal to Integer]], [[Memory Size#Integer to Binary|Integer to Binary]]
+	`0100 0001 0100 0100 0000 0000 0000 0000`
+2. **Split into Components**: `0 10000010 10001000000000000000000`
+3. **Determine Mantissa(M)**: `1.` before the binary → `1.1000100`
+4. **Determine Exponent(E)**:                         Refer: [[Memory Size#Binary to Integer|Binary to Integer]]
+	   `10000010` → **130** → $130 - 127 = 3$ → **3**      
+5. **Sign(S)** = `0`  →  Positive.
+6. **Binary to decimal**: $1.10001 × 2^3$ → `1100.01` = **+12.25**     Refer: [[Memory Size#Binary to Decimal|Binary to Decimal]]
+
+## IEEE 64-bit Representation
+![[images/Pasted image 20250702152758.png]]
+The representation process is same as [[Data Representation#IEEE 32-bit Representation|IEEE 32-bit Representation]]. The only difference is IEEE 64-bit format allows an **11-bit biased exponent(E)** and 11-bit biased exponent used a bias of ±$1023$.
+### Not a Number (NaN)
+A **NaN (Not a Number)** is a special value used to represent undefined or unrepresentable results in **floating-point arithmetic**.
+
+- When a value is **interpreted as a floating-point number** but **does not follow the correct format** (for 32-bit or 64-bit standards).    
+- When an **integer is mistakenly treated as a floating-point** value.
+- When the result of a **floating-point operation** (e.g., addition, subtraction, multiplication, or division) is **too large** or **too small** to be represented.
+- When the operation itself is **undefined**, such as:
+    - $\frac{0}{0}$
+    - $\infty - \infty$
+    - $\sqrt{-1}$ (in real numbers)
+
+- **NaN** is **not a valid number**, but it is still a **valid floating-point value** used to signal errors. 
+- It allows a program to continue running even if a computation becomes undefined.
+- **NaNs propagate** through calculations: any arithmetic operation with a **NaN** usually results in a **NaN**.
+# Characters and Strings
+
+In addition to numeric data, **symbolic (non-numeric) data** is also commonly used. For example, a message like `"Hello World"`.
+
+- Computers are built to **store and process numbers**.
+- To handle symbols like letters, digits, or punctuation, we **assign numeric values to each character**.
+- This allows symbolic data to be stored and processed in memory.
+
+## Character Representation
+A **character** is a unit of information that represents a **symbol** such as:
+- Letters (`A`, `b`, etc.)
+- Digits (`0`–`9`)
+- Punctuation (`.`, `!`, etc.)
+- Whitespace (`space`, `tab`, `newline`, etc.)
+- **Control characters**, which affect text processing (e.g., carriage return, tab)
+
+#### American Standard Code for Information Interchange (ASCII)
+- **ASCII** is a standard that assigns a **numeric value to each character**.
+- Examples:
+    - `'A'` → `65` (decimal) or `0x41` (hex)
+    - `'9'` → `57` (decimal) or `0x39` (hex)
+
+> If `9` (as an **integer**) is interpreted as an ASCII character (`0x09`), it will be seen as a **tab** character.
+- **Character** `'2'` ≠ **Integer** `2`
+    - Characters: for **display**, not for calculation
+    - Integers: for **calculation**, not directly displayable
+- **Characters** are stored using **1 byte (8 bits)**, aligning with **byte-addressable memory**.
+
+#### Unicode
+- **Unicode** is a modern standard supporting **multiple languages and scripts**.
+- Unicode uses encodings like:
+    - **UTF-8** (most common, backward-compatible with ASCII)
+    - **UTF-16**, **UTF-32**
+- Unicode assigns a **unique number to every character**, regardless of platform, language, or program.
+
+> Details of Unicode encoding are beyond this section.
+
+
+## String Representation
+A **string** is a **sequence of characters**, typically stored in memory with a **NULL terminator**.
+> **NULL** = special ASCII control character (`0x00`) marking the **end of the string**
+##### Example 1: `"Hello"`
+
+|Character|`H`|`e`|`l`|`l`|`o`|`NULL`|
+|---|---|---|---|---|---|---|
+|ASCII (dec)|72|101|108|108|111|0|
+|ASCII (hex)|0x48|0x65|0x6C|0x6C|0x6F|0x00|
+##### Example 2: `"19653"`
+
+|Character|`1`|`9`|`6`|`5`|`3`|`NULL`|
+|---|---|---|---|---|---|---|
+|ASCII (dec)|49|57|54|53|51|0|
+|ASCII (hex)|0x31|0x39|0x36|0x35|0x33|0x00|
+
+>  `"19653"` as a **string** uses **6 bytes** (including NULL)  
+>  `19653` as an **integer** can be stored in **2 bytes** (one word)
+

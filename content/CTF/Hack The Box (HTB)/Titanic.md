@@ -254,19 +254,3 @@ root.txt
 ```
 
 This file contained the **root flag**, completing the CTF!
-
----
-
-## Conclusion
-
-This Titanic CTF was an exciting challenge that involved multiple techniques, including:
-
-- Path Traversal
-- Virtual Host Enumeration
-- Gitea Configuration Extraction
-- Hash Extraction and Cracking
-- Privilege Escalation using a known CVE
-
-Through detailed reconnaissance and exploitation, I navigated through the system, eventually escalating privileges to root.
-
-This experience emphasized the importance of understanding web application logic and leveraging public exploits to gain system access.
