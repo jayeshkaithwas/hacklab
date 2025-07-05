@@ -14,4 +14,6 @@ description: Welcome to the Jayesh's HackLab.
 
 >[!quote] My software never has bugs. It justdevelops random features.
 
+>[!quote] **Why are math books sad? Because they have so many problems.**
+
 Please feel free to [provide feedback](https://github.com/jayeshkaithwas/hacklab/issues) regarding the accuracy of the notes, blogs etc.
