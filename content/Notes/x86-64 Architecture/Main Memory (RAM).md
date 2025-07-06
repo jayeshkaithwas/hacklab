@@ -10,7 +10,7 @@ To store a **double-word(32-bits)**, four bytes are required which use four memo
 ![[images/Pasted image 20250701120825.png]]
 >**Understand with example:**
 
-We have a `DWORD var1 = 12345678`.
+We have a `DWORD var1 = 12345678`. 
 
 Converting `12345678`to bits.
 Refer: [[Memory Size#**Decimal to Binary Conversion**|Decimal to Binary Conversion]]
