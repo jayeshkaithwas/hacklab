@@ -5,3 +5,7 @@ aliases:
 tags:
   - Assembly
 ---
+# Installation
+```sh
+sudo apt install 
+```
