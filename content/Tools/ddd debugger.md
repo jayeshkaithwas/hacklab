@@ -55,7 +55,7 @@ However, click the Run command will re-start execution from the beginning and st
 ## Register Content
 
 - Status → Registers
-- ![[images/Pasted image 20250709160527.png]]
+![[images/Pasted image 20250709160527.png]]
 
 # Commands
 
