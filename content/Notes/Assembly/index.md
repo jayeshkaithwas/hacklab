@@ -2,7 +2,10 @@
 title: Assembly
 aliases:
   - Assembly
+tags:
+  - Assembly
 ---
+
 **Assembly language** is a low-level programming language that provides a symbolic, human-readable way to write instructions that a CPU understands. It’s one step above **machine code** (binary) and is specific to a **CPU architecture** like x86, x86-64, ARM, RISC-V, etc.
 
 # Features

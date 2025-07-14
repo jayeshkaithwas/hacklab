@@ -3,6 +3,7 @@ title: Program Format
 aliases:
   - Program Format
 ---
+
 **A properly formatted assembly source file consists of several main parts:**
 - **[[Program Format#Data Section (`section .data`)|Data Section]]** where initialized data is declared and defined.
 - **[[Program Format#BSS Section (`section .bss`)|BSS Section]]** where uninitialized data is declared.

@@ -2,12 +2,16 @@
 title: Finding Subdomains
 aliases:
   - Finding Subdomains
+tags:
+  - Enumeration
+  - BugBounty
+description:
 ---
 Techniques to find Subdomains:
-1. Google dorking
-2. crt.sh
-3. Sublist3r
-4. Amass
+1. [[Finding Subdomains#Google Dork for Finding Subdomains|Google Dorking]]
+2. [[Finding Subdomains#Crt.sh|crt.sh]]
+3. [[Finding Subdomains#Sublist3r|Sublist3r]]
+4. [[Finding Subdomains#Amass|Amass]]
 
 # Google Dork for Finding Subdomains
 
