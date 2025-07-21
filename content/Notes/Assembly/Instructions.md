@@ -80,3 +80,50 @@ mov qword [qAns], rax         ; rax → qAns
 ```
 
 > In some cases, you can **omit `byte`, `word`, etc.** if the size is clear from the register.
+
+# Addresses and Values
+### Accessing Memory: `[]` Brackets
+
+In x86-64 assembly, square brackets `[]` are used to **dereference** a memory location. That means you're asking for the **value stored at that memory address**.
+
+> **Example:**
+
+```asm
+mov rax, qword [var1] ; value of var1 in rax
+```
+
+- This loads the **value** stored at the memory address labeled `var1` into the `rax` register.
+- `qword` specifies that you're accessing 8 bytes (64 bits).
+
+### Without Brackets: Getting the Address Instead
+
+When you **omit the brackets**, you're asking the assembler to give you the **address of the variable**, not its value.
+
+> **Example:**
+
+```asm
+mov rax, var1 ; address of var1 in rax
+```
+
+- This moves the **address** (i.e., the memory location) of `var1` into `rax`, not its value.
+
+### lea
+The tricky part is: **both forms are valid**, so the assembler will not warn you. But they do **very different things**, so it's easy to make mistakes if you confuse them.
+
+Using `lea`  Load Effective Address.
+
+The `lea` (Load Effective Address) instruction is another way to load an address into a register. It's like doing pointer arithmetic or getting the address of a variable, similar to the `&` operator in C.
+
+> **Syntax:**
+```asm
+lea reg64, [memory_operand]
+```
+
+> **Examples:**
+```asm
+lea rcx, byte [bvar]   ; loads the address of bvar into rcx
+lea rsi, dword [dVar]  ; loads the address of dVar into rsi
+```
+
+- Despite `[bvar]` and `[dVar]` looking like values, `lea` doesn't fetch the value at that address. It just calculates and returns the address itself.
+- Think of `lea` as a **"get address"** tool, often used for pointer math or address calculation.
