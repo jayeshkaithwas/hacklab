@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"8664892cbb8862ae","type":"text","text":"#### Client Fulfilment Tracker\n- `STATS DASHBOARD` as the primary, professional report you share with each of your clients. \n- It consolidates every key performance indicator (KPI) you manage for them into one clean view.\n- It directly answers your clients' main question: \"Is this working?\" You can show them the`Amount Spent` on their ads and the `Revenue` you've generated, instantly calculating their `ROI`. This is how you justify your fees and retain clients.","x":-180,"y":80,"width":500,"height":320,"color":"5"},
+		{"id":"88a01e9aff6bab31","type":"text","text":"##### Settler Tracker\n- This is team management tool. \n- It measures the raw output of your appointment setters (`Dials Made`, `Conversations Had`) and their effectiveness (`Convo To Book Rate (%)`). \n- If a setter is under-performing for a specific client, this data provides the basis for a productive coaching session.","x":-80,"y":-600,"width":450,"height":258,"color":"6"},
+		{"id":"c800f11c7624cff1","type":"text","text":"#### Setter/Closer Tracker","x":240,"y":-142,"width":330,"height":55},
+		{"id":"dce700a25f4c3c25","type":"text","text":"##### Closer Tracker\n- This measures sales effectiveness. \n- It helps to see which of our closers are best at converting leads into paying customers for our clients by tracking their `Call Close (%)` and `Total Revenue ($)`.\n","x":460,"y":-600,"width":460,"height":258,"color":"6"},
+		{"id":"22c2827e1e5806f8","type":"text","text":"#### Finance Tracker (Agency Profitability Center) \n- It ensures that as you grow your clients' businesses, you are also growing a profitable agency for yourself.\n###### **Expense Management** \n- The `Operating Expenses` sheet prompts you to categorize every cost into key areas like`Labour`, `Marketing`, and `Overhead`. This will give you incredible clarity on where your money is going. You might find that software costs (`Overhead`) are higher than you thought, or that you're spending a lot on ads to get new clients (`Marketing`).\n###### **Profit Analysis** \n- By tracking your `Total Revenue` against your total expenses, you can monitor your `Net Operating Profit %` month over month. This is the ultimate health metric for your agency.\n- It distinguishes between `New Cash Collected` and `BE Recurring Revenue` (Back-End), giving you a better handle on your cash flow and future revenue projections.","x":460,"y":80,"width":687,"height":571,"color":"5"},
+		{"id":"c7513f18ad35fa9e","type":"text","text":"#### CEO Dashboard\n \n - It rolls up the most vital KPIs from all the Sub Trackers into one dashboard so you can make high-level, data-driven decisions","x":140,"y":920,"width":500,"height":180,"color":"2"},
+		{"id":"e1aa9c88922bd05f","type":"text","text":"##### Marketing Tracker\n- This is your media buyer's command center. \n- If the `Cost Per Lead` on the Fulfilment Tracker is high for Client A, this sheet tells you which day it spiked. \n- This allows you to check the ads from that day and optimize them immediately, rather than waiting until the end of the month.\n\nRefer : [[Marketing Tracker]]\n  ","x":-680,"y":-380,"width":530,"height":265,"color":"6"}
+	],
+	"edges":[
+		{"id":"d03b194e181510e3","fromNode":"8664892cbb8862ae","fromSide":"top","toNode":"e1aa9c88922bd05f","toSide":"bottom"},
+		{"id":"d8287ce70ab31012","fromNode":"8664892cbb8862ae","fromSide":"top","toNode":"c800f11c7624cff1","toSide":"bottom"},
+		{"id":"93b64cb94f5bf826","fromNode":"c800f11c7624cff1","fromSide":"top","toNode":"88a01e9aff6bab31","toSide":"bottom"},
+		{"id":"687c2474678203c1","fromNode":"c800f11c7624cff1","fromSide":"top","toNode":"dce700a25f4c3c25","toSide":"bottom"},
+		{"id":"aecf26a66f7bf693","fromNode":"8664892cbb8862ae","fromSide":"bottom","toNode":"c7513f18ad35fa9e","toSide":"top"},
+		{"id":"2a0cfd9cc4f39674","fromNode":"22c2827e1e5806f8","fromSide":"bottom","toNode":"c7513f18ad35fa9e","toSide":"top"}
+	]
+}
